@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import Validation from "../api/LoginValidation";
@@ -12,7 +12,7 @@ function Login() {
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const navigate = HashRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;

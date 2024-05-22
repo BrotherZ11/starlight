@@ -10,7 +10,7 @@ app.use(cors());
 const port = 8081;
 
 const db = mysql.createConnection({
-  host: '127.0.0.1',
+  host: '34.38.1.96',
   user: 'root',
   password: '',
   database: 'casino'
