@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
-import Validation from "../api/SignupValidation";
+import { validateFirstForm, validateSecondForm } from "../api/SignupValidation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
@@ -46,12 +46,11 @@ const SignUp = () => {
   };
 
   const handleKeyEnterPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault();
       event.target.click();
     }
   };
-  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -61,9 +60,17 @@ const SignUp = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleNextStep = (e) => {
+  const handleNextStep = async (e) => {
     e.preventDefault();
-    setShowNextForm(true);
+    const formErrors = await validateFirstForm(values);
+    setErrors(formErrors);
+    if (Object.keys(formErrors).length === 0) {
+      if (!termsChecked) {
+        window.alert("Debes aceptar los terminos");
+      } else {
+        setShowNextForm(true);
+      }
+    }
   };
 
   const handlePreviousStep = (e) => {
@@ -81,20 +88,23 @@ const SignUp = () => {
       const strength = calculatePasswordStrength(value);
       setPasswordStrength(strength);
     }
-    setValues((prev) => ({ ...prev, [name]: value }));
+    setValues((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
-  
 
-  const handleSingup = (e) => {
+  const handleSingup = async (e) => {
     e.preventDefault();
 
-    const formErrors = Validation(values);
+    const formErrors = await validateSecondForm(values);
     setErrors(formErrors);
 
-    if (
-      Object.values(formErrors).every((error) => error === "") &&
-      termsChecked
-    ) {
+    if (Object.values(formErrors).every((error) => error === "")) {
       console.log("Form is valid");
       axios
         .post("http://localhost:8081/signup", values)
@@ -103,11 +113,8 @@ const SignUp = () => {
           navigate("/login");
         })
         .catch((err) => {
-          window.alert("El correo electrónico ya ha sido utilizado.");
           console.log(err);
         });
-    } else {
-      setErrors({ register: "Faltan Datos" });
     }
   };
 
@@ -131,104 +138,122 @@ const SignUp = () => {
               {registrationSuccess ? (
                 <p className="text-success">Registro exitoso</p>
               ) : showNextForm ? (
+                // Formulario 2
                 <form onSubmit={handleSingup}>
+                  {/* Nombre */}
                   <div className="mb-4">
                     <label
                       htmlFor="name"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.name ? "text-danger" : "text-warning "
+                      }`}
                     >
-                      Nombre
+                      Nombre {errors.name && <span>*</span>}
                     </label>
                     <input
                       type="text"
                       name="name"
                       onChange={handleInput}
-                      className="form-control"
+                      className={`form-control ${
+                        errors.name ? "is-invalid" : ""
+                      }`}
                       value={values.name}
                       aria-label="Nombre"
                     />
-                    {errors.name && (
-                      <span className="text-danger"> {errors.name}</span>
-                    )}
                   </div>
+
+                  {/* Apellidos */}
                   <div className="mb-4">
                     <label
                       htmlFor="lastname"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.lastname ? "text-danger" : "text-warning "
+                      }`}
                     >
-                      Apellidos
+                      Apellidos {errors.lastname && <span>*</span>}
                     </label>
                     <input
                       type="text"
                       name="lastname"
                       onChange={handleInput}
-                      className="form-control"
+                      className={`form-control ${
+                        errors.lastname ? "is-invalid" : ""
+                      }`}
                       value={values.lastname}
                       aria-label="Apellidos"
                     />
-                    {errors.lastname && (
-                      <span className="text-danger"> {errors.lastname}</span>
-                    )}
                   </div>
+
+                  {/* DNI */}
                   <div className="mb-4">
                     <label
                       htmlFor="dni"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.dni ? "text-danger" : "text-warning "
+                      }`}
                     >
-                      DNI
+                      DNI {errors.dni && <span>*</span>}
                     </label>
                     <input
                       type="text"
                       name="dni"
                       onChange={handleInput}
-                      className="form-control"
+                      className={`form-control ${
+                        errors.dni ? "is-invalid" : ""
+                      }`}
                       value={values.dni}
                       aria-label="dni"
                     />
-                    {errors.dni && (
-                      <span className="text-danger"> {errors.dni}</span>
-                    )}
+
+                    {/* Pais */}
                   </div>
                   <div className="mb-4">
                     <label
                       htmlFor="country"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.country ? "text-danger" : "text-warning "
+                      }`}
                     >
-                      Pais
+                      Pais {errors.country && <span>*</span>}
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${
+                        errors.country ? "is-invalid" : ""
+                      }`}
                       name="country"
                       onChange={handleInput}
                       value={values.country}
                       aria-label="Pais"
                     />
-                    {errors.country && (
-                      <span className="text-danger"> {errors.country}</span>
-                    )}
                   </div>
 
+                  {/* Fecha */}
                   <div className="mb-4">
                     <label
                       htmlFor="date"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.date ? "text-danger" : "text-warning "
+                      }`}
                     >
-                      Fecha de Nacimiento
+                      Fecha de Nacimiento {errors.date && <span>*</span>}
                     </label>
                     <input
                       type="date"
                       name="date"
                       onChange={handleInput}
-                      className="form-control"
+                      className={`form-control ${
+                        errors.date ? "is-invalid" : ""
+                      }`}
                       value={values.date}
                       aria-label="Fecha de Nacimiento"
                     />
-                    {errors.date && (
+                    {/* {errors.date && (
                       <span className="text-danger"> {errors.date}</span>
-                    )}
+                    )} */}
                   </div>
 
+                  {/* Boton volver */}
                   <div className="d-flex justify-content-between">
                     <button
                       type="button"
@@ -237,6 +262,7 @@ const SignUp = () => {
                     >
                       Volver
                     </button>
+                    {/* Boton Registrarse */}
                     <button
                       type="submit"
                       className="btn btn-warning yellow-600 px-6 py-2 rounded font-bold w-full"
@@ -246,37 +272,46 @@ const SignUp = () => {
                   </div>
                 </form>
               ) : (
+                //Formulario 1
                 <form onSubmit={handleNextStep}>
+                  {/* Email */}
                   <div className="mb-4">
                     <label
                       htmlFor="email"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.email ? "text-danger" : "text-warning "
+                      }`}
                     >
-                      Email
+                      Email {errors.email && <span>*</span>}
                     </label>
                     <input
                       type="email"
                       onChange={handleInput}
-                      className="form-control"
+                      className={`form-control ${
+                        errors.email ? "is-invalid" : ""
+                      }`}
                       name="email"
                       value={values.email}
                       aria-label="email"
                     />
-                    {errors.email && (
-                      <span className="text-danger"> {errors.email}</span>
-                    )}
+
+                    {/* Contraseña */}
                   </div>
                   <div className="mb-4">
                     <label
                       htmlFor="password"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.password ? "text-danger" : "text-warning"
+                      }`}
                     >
-                      Contraseña
+                      Contraseña {errors.password && <span>*</span>}
                     </label>
                     <div className="input-group">
                       <input
                         type={showPassword ? "text" : "password"}
-                        className="form-control"
+                        className={`form-control ${
+                          errors.password ? "is-invalid" : ""
+                        }`}
                         onChange={handleInput}
                         name="password"
                         value={values.password}
@@ -291,19 +326,22 @@ const SignUp = () => {
                         <FaEye />
                       </button>
                     </div>
-                    {errors.password && (
-                      <span className="text-danger"> {errors.password}</span>
-                    )}
                     {values.password && (
                       <div className="mt-2">
                         <p className="text-white">Strength:</p>
                         <div className="progress">
                           <div
                             className={`progress-bar bg-${
-                              passwordStrength < 3 ? "danger" : passwordStrength < 5 ? "warning" : "success"
+                              passwordStrength < 3
+                                ? "danger"
+                                : passwordStrength < 5
+                                ? "warning"
+                                : "success"
                             }`}
                             role="progressbar"
-                            style={{ width: `${(passwordStrength / 5) * 100}%` }}
+                            style={{
+                              width: `${(passwordStrength / 5) * 100}%`,
+                            }}
                             aria-valuenow={passwordStrength}
                             aria-valuemin="0"
                             aria-valuemax="5"
@@ -313,17 +351,23 @@ const SignUp = () => {
                     )}
                   </div>
 
+                  {/* Confirmar Contraseña */}
                   <div className="mb-4">
                     <label
                       htmlFor="password"
-                      className="form-label text-warning yellow-600"
+                      className={`form-label ${
+                        errors.confirmPassword ? "text-danger" : "text-warning"
+                      }`}
                     >
-                      Confirmar Contraseña
+                      Confirmar Contraseña{" "}
+                      {errors.confirmPassword && <span>*</span>}
                     </label>
                     <div className="input-group">
                       <input
                         type={showConfirmPassword ? "text" : "password"}
-                        className="form-control"
+                        className={`form-control ${
+                          errors.confirmPassword ? "is-invalid" : ""
+                        }`}
                         onChange={handleInput}
                         name="confirmPassword"
                         value={values.confirmPassword}
@@ -337,10 +381,9 @@ const SignUp = () => {
                         <FaEye />
                       </button>
                     </div>
-                    {errors.password && (
-                      <span className="text-danger"> {errors.password}</span>
-                    )}
                   </div>
+
+                  {/* Términos y Condiciones */}
                   <div className="mb-4">
                     <div className="form-check">
                       <input
@@ -349,13 +392,12 @@ const SignUp = () => {
                         className="form-check-input"
                         checked={termsChecked}
                         onChange={toggleTerms}
-                        onKeyPress={handleKeyEnterPress} 
+                        onKeyPress={handleKeyEnterPress}
                         aria-label="Aceptar los términos y condiciones"
                       />
                       <label
                         htmlFor="terms"
                         className="form-check-label text-white"
-                        
                       >
                         Tengo 18 y acepto los{" "}
                         <a href="https://drive.google.com/file/d/19_fFcDUj8Yg_q6Ma0S8pdOmwTd-5YPAu/view?usp=drive_link">
@@ -364,6 +406,7 @@ const SignUp = () => {
                       </label>
                     </div>
                   </div>
+                  {/* Boton */}
                   <button
                     type="submit"
                     className="btn btn-warning yellow-600 px-6 py-2 rounded font-bold w-full"
@@ -373,16 +416,10 @@ const SignUp = () => {
                   <div className="mt-2">
                     <span className="text-white">
                       Si ya tienes una cuenta,{" "}
-                      <a href="/login">Inicia sesion</a>
+                      <a href="#/login">Inicia sesion</a>
                     </span>
                   </div>
                 </form>
-              )}
-              <br></br>
-              {errors.register && (
-                <div className="alert alert-danger" role="alert">
-                  {errors.register}
-                </div>
               )}
             </div>
           </div>

@@ -54,10 +54,15 @@ app.post('/login', (req, res) => {
       res.status(500).send('Error al iniciar sesión');
     } else {
       if (result.length > 0) {
-        const userId = result[0].id;
-        res.status(200).json({ userId: userId });
+        const user = result[0];
+        if (user.password === req.body.password) {
+          const userId = user.id;
+          res.status(200).json({ userId: userId });
+        } else {
+          res.status(401).send('Contraseña incorrecta');
+        }
       } else {
-        res.status(401).send('Credenciales inválidas');
+        res.status(401).send('Correo incorrecto');
       }
     }
   });
