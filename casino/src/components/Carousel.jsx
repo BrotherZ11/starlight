@@ -27,6 +27,7 @@ function Carousel() {
           </div>
           <div className="carousel-item">
             <img src={Slots} className="d-block w-100" alt="Slide Tragaperras" />
+            <Link to={"/slots"} className="stretched-link">
             <button
               className="btn btn-success btn-sm position-absolute bottom-0 start-50 translate-middle-x"
               aria-label="Ir a tragaperras"
@@ -34,6 +35,7 @@ function Carousel() {
             >
               JUEGA AHORA
             </button>
+            </Link>
           </div>
         </div>
         <button

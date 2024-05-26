@@ -19,3 +19,27 @@
     transform: rotateX(360deg);
   }
 }
+
+.bet-button {
+  margin-left: 10px;
+  background-color: white;
+  color: black;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
