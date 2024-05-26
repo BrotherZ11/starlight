@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useWallet } from "../context/WalletContext"; // Import the useWallet hook
+import { useWallet } from "../context/WalletContext"; // Importar el hook useWallet
 import "../styles/Slots.css";
 
 const SlotMachine = () => {
@@ -13,6 +13,7 @@ const SlotMachine = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const userId = localStorage.getItem("userId");
   const symbols = ["🍒", "🍋", "🍊", "🍇", "🍉"];
+  
   const resultMessageRef = useRef(null); // Ref for the result message
 
   // Function to generate random initial results
@@ -20,7 +21,7 @@ const SlotMachine = () => {
     return Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]);
   };
 
-  // Get the userId from localStorage when the component mounts
+  // Obtener el userId desde el localStorage cuando el componente se monta
   useEffect(() => {
     fetchWalletBalance(userId);
     setResults(generateRandomResults());
@@ -110,7 +111,7 @@ const SlotMachine = () => {
                   // Clear the result message
                   clearResultMessage();
                   
-                  // Check if there is enough balance in the wallet before spinning
+                  // Verificar si hay suficiente saldo en el monedero antes de girar
                   if (betAmount <= walletBalance) {
                     setSpinning(true);
                     setRolling(true);
@@ -122,7 +123,7 @@ const SlotMachine = () => {
                         setRolling(false);
                         const allEqual = newResults.every((val, i, arr) => val === arr[0]);
                         if (allEqual) {
-                          // If all three results are the same, retrieve double the bet
+                          // Si los tres resultados son iguales, recuperar el doble de la apuesta
                           try {
                             await addAmountToWallet(userId, walletBalance + betAmount * 2);
                             displayResultMessage("¡FELICIDADES! Ganaste.");
@@ -131,7 +132,7 @@ const SlotMachine = () => {
                             setErrorMessage("Error procesando la apuesta.");
                           }
                         } else {
-                          // If you don't win, lose the bet money
+                          // Si no ganas, perder el dinero apostado
                           try {
                             await addAmountToWallet(userId, walletBalance - betAmount);
                             displayResultMessage("Más suerte para la próxima. Perdiste.");
@@ -143,7 +144,7 @@ const SlotMachine = () => {
                       }, 1000);
                     }, 2000);
                   } else {
-                    setErrorMessage("You don't have enough money in your wallet.");
+                    setErrorMessage("No tienes suficiente dinero en tu monedero.");
                   }
                 }
               }}

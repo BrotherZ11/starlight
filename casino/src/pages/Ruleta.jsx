@@ -16,7 +16,7 @@ import FAQ from "../components/FAQ.jsx";
 import "../styles/Ruleta.css";
 
 const Ruleta = () => {
-  const { fetchWalletBalance } = useWallet();
+  const { fetchWalletBalance } = useWallet(); // Usa el hook del contexto para obtener la función de actualización del monedero
   const [rotationDegrees, setRotationDegrees] = useState(0);
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [numberSpins, setNumberSpins] = useState(1);
@@ -76,7 +76,7 @@ const Ruleta = () => {
     const response = await fetchWalletBalance(userId);
     if (!response || !response.data || response.data.amount === undefined) {
       console.error("Invalid response format:", response);
-      return;
+      return; // Salir de la función si la respuesta no es válida
     }
     const walletAmount = response.data.amount;
     if (index < 0 || index > 5) {
@@ -151,14 +151,17 @@ const Ruleta = () => {
     const response = await fetchWalletBalance(userId);
     const currentBalance = response.data.amount;
 
+     // Calcula el nuevo saldo del monedero
     const newBalance = currentBalance + profit - lose;
 
+    // Actualiza el saldo en el servidor
     try {
       await axios.post("http://localhost:8081/walletUpdate", {
         money: newBalance,
         id: userId,
       });
 
+      // Actualiza el saldo en el contexto solo después de que se actualiza en el servidor correctamente
       fetchWalletBalance(userId);
     } catch (error) {
       console.error("Error updating wallet balance:", error);
@@ -206,7 +209,7 @@ const Ruleta = () => {
         }else {
           moneyGained(amounts);
         }
-      }, 5100);
+      }, 5100); // Espera 5 segundos, igual que la duración de la transición
       return () => clearTimeout(transitionTimer);
     }
   }, [girando]);
