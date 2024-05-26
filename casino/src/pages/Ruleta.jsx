@@ -216,6 +216,7 @@ const Ruleta = () => {
 
   return (
     <>
+    <div style = {{backgroundColor: "#282828"}}>
       <Navbar />
       <div className="ruleta-page container">
         <div className="faq-container">
@@ -382,6 +383,7 @@ const Ruleta = () => {
         </div>
       </div>
       <Footer />
+      </div>
     </>
   );
 };

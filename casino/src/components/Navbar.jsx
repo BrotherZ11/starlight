@@ -48,7 +48,7 @@ function Navbar() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <button
-              className="btn btn-sm btn-outline-light end-0 ms-2 bottom-0 mb-2 me-2"
+              className="btn btn-sm btn-outline-light position-fixed bottom-90px end-0  me-2"
               tabIndex={-1}
               aria-label="Ayuda"
             >
@@ -94,10 +94,10 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column flex-lg-row align-items-center mt-2 mt-lg-0">
+        <div className="d-flex flex-column flex-lg-row align-items-center">
           {localStorage.getItem("isLoggedIn") ? (
             <button
-              className="btn me-2 mb-2"
+              className="btn me-2 mb-5"
               style={{ backgroundColor: "#BB9D0A" }}
               onClick={handleLogout}
               tabIndex={0}
@@ -108,7 +108,7 @@ function Navbar() {
           ) : (
             <>
               <button
-                className="btn"
+                className="btn mb-5"
                 aria-label="Inicio de sesión"
                 style={{ backgroundColor: "#BB9D0A" }}
                 tabIndex={-1}
@@ -122,7 +122,7 @@ function Navbar() {
                 </Link>
               </button>
               <button
-                className="btn mt-2 mb-2"
+                className="btn mb-5"
                 aria-label="Registro"
                 style={{
                   marginLeft: "10px",
