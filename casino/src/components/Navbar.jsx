@@ -100,6 +100,7 @@ function Navbar() {
               className="btn me-2 mb-2"
               style={{ backgroundColor: "#BB9D0A" }}
               onClick={handleLogout}
+              tabIndex={0}
               aria-label="Cerrar sesión"
             >
               Cerrar sesión

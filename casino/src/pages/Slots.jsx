@@ -43,14 +43,12 @@ const SlotMachine = () => {
       <div className="container text-center mt-5">
         <div className="row">
           <div className="col">
-            <div className="card" style={{backgroundColor: "#E4A700"}}>
+            <div className="card" style={{ backgroundColor: "#E4A700" }}>
               <div className="card-body">
-                <div className="row">
+                <div className="slot-frame">
                   {results.map((symbol, index) => (
-                    <div className="col" key={index}>
-                      <div className={`slot${rolling ? " rolling" : ""} display-1`}>
-                        {spinning ? "🔄" : symbol}
-                      </div>
+                    <div className={`slot${rolling ? " rolling" : ""} display-1`} key={index}>
+                      {spinning ? "🔄" : symbol}
                     </div>
                   ))}
                 </div>
@@ -78,25 +76,25 @@ const SlotMachine = () => {
         {/* Buttons to input various amounts */}
         <div className="row mt-3">
           <div className="col">
-            <button className="btn btn-secondary mr-2 bet-button" onClick={() => setBetAmount(1)}>
+            <button className="btn btn-secondary mr-2 bet-button" aria-label="Apostar 1€" onClick={() => setBetAmount(1)}>
               1€
             </button>
-            <button className="btn btn-secondary mr-2 bet-button" onClick={() => setBetAmount(2)}>
+            <button className="btn btn-secondary mr-2 bet-button" aria-label="Apostar 2€" onClick={() => setBetAmount(2)}>
               2€
             </button>
-            <button className="btn btn-secondary mr-2 bet-button" onClick={() => setBetAmount(5)}>
+            <button className="btn btn-secondary mr-2 bet-button" aria-label="Apostar 5€" onClick={() => setBetAmount(5)}>
               5€
             </button>
-            <button className="btn btn-secondary mr-2 bet-button" onClick={() => setBetAmount(10)}>
+            <button className="btn btn-secondary mr-2 bet-button" aria-label="Apostar 10€" onClick={() => setBetAmount(10)}>
               10€
             </button>
-            <button className="btn btn-secondary mr-2 bet-button" onClick={() => setBetAmount(20)}>
+            <button className="btn btn-secondary mr-2 bet-button" aria-label="Apostar 20€" onClick={() => setBetAmount(20)}>
               20€
             </button>
-            <button className="btn btn-secondary mr-2 bet-button" onClick={() => setBetAmount(50)}>
+            <button className="btn btn-secondary mr-2 bet-button" aria-label="Apostar 50€" onClick={() => setBetAmount(50)}>
               50€
             </button>
-            <button className="btn btn-secondary bet-button" onClick={() => setBetAmount(walletBalance)}>
+            <button className="btn btn-secondary bet-button" aria-label={`Apostar ${walletBalance}€`} onClick={() => setBetAmount(walletBalance)}>
               All In
             </button>
           </div>
@@ -153,8 +151,8 @@ const SlotMachine = () => {
             >
               {spinning ? "Girando..." : "Girar"}
             </button>
-            {/* Result message */}
-            <div ref={resultMessageRef} className="text-white mt-3"></div>
+            {/* Result message with aria-live attribute */}
+            <div ref={resultMessageRef} className="text-white mt-3" aria-live="polite"></div>
           </div>
         </div>
       </div>
