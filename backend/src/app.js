@@ -118,7 +118,7 @@ app.post("/wallet/add", (req, res) => {
 
   // Actualizar la cantidad en el monedero del usuario en la base de datos
   db.query(
-    "UPDATE user SET money = money + ? WHERE id = ?",
+    "UPDATE user SET money = ? WHERE id = ?",
     [amountToAdd, userId],
     (err, result) => {
       if (err) {
@@ -147,6 +147,7 @@ app.post('/walletUpdate', (req, res) => {
       res.status(200).send('Dinero actualizado con éxito');
     }
   });
+  
 });
 
 app.listen(port, () => {

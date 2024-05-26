@@ -1,7 +1,7 @@
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Shop from "./pages/Shop";
 import Ayuda from "./pages/Ayuda";
 import Ruleta from "./pages/Ruleta";
@@ -9,17 +9,15 @@ import Slots from "./pages/Slots";
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/shop" element={<Shop />}></Route>
-        <Route path="/ayuda" element={<Ayuda />}></Route>
-        <Route path="/ruleta" element={<Ruleta />}></Route>
-        <Route path="/slots" element={<Slots />}></Route>
-      </Routes>
-    </HashRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/shop" element={<Shop />} />
+      <Route path="/ayuda" element={<Ayuda />} />
+      <Route path="/ruleta" element={<Ruleta />} />
+      <Route path="/slots" element={<Slots />} />
+    </Routes>
   );
 }
 

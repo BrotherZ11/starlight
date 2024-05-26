@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Tienda_10 from "../assets/Tienda_10.png";
 import Tienda_50 from "../assets/Tienda_50.png";
 import Tienda_100 from "../assets/Tienda_100.png";
+import { useWallet } from "../context/WalletContext";
 import axios from "axios";
 
 function ShopOpciones() {
@@ -13,8 +14,9 @@ function ShopOpciones() {
   );
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleAddAmount = async () => {
-    // Validar que el valor sea numérico y positivo
+  const { addAmountToWallet } = useWallet();
+
+  const handleAddAmount = () => {
     const parsedAmount = parseFloat(amountToAdd);
     if (isNaN(parsedAmount) || parsedAmount <= 0) {
       setErrorMessage("Por favor, introduce una cantidad válida.");
@@ -26,14 +28,10 @@ function ShopOpciones() {
   const confirmAddAmount = async () => {
     try {
       const userId = localStorage.getItem("userId");
-      const response = await axios.post("http://localhost:8081/wallet/add", {
-        userId: userId,
-        amountToAdd: parseFloat(amountToAdd),
-      });
-      console.log(response.data); // Mensaje de éxito o error
-      localStorage.setItem("showSuccessMessage", "true"); // Mostrar mensaje de éxito
-
-      window.location.reload();
+      await addAmountToWallet(userId, parseFloat(amountToAdd));
+      localStorage.setItem("showSuccessMessage", "true");
+      setShowSuccessMessage(true);
+      setShowConfirmation(false);
     } catch (error) {
       console.error("Error adding money:", error);
     }
@@ -43,8 +41,8 @@ function ShopOpciones() {
     setSelectedAmount(amount);
     setAmountToAdd(amount);
   };
+
   useEffect(() => {
-    // Limpiar localStorage cuando el componente se desmonte
     return () => {
       localStorage.removeItem("showSuccessMessage");
     };
@@ -126,7 +124,7 @@ function ShopOpciones() {
               value={amountToAdd}
               onChange={(e) => {
                 setAmountToAdd(e.target.value);
-                setErrorMessage(""); // Limpiar el mensaje de error al cambiar el valor
+                setErrorMessage("");
               }}
             />
             <div
@@ -147,7 +145,11 @@ function ShopOpciones() {
               Añadir cantidad
             </button>
           </div>
-          {/* Modal para confirmación */}
+          {errorMessage && (
+            <div className="alert alert-danger mt-3" role="alert">
+              {errorMessage}
+            </div>
+          )}
           <div
             className="modal"
             tabIndex="-1"

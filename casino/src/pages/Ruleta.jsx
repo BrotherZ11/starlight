@@ -4,12 +4,13 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import axios from "axios";
-import { setWalletMoney } from "../components/Navbar.jsx";
+import { useWallet } from "../context/WalletContext.jsx";
 import mp3Sound from "../assets/sound.mp3";
-import { Link } from "react-router-dom";
 import FAQ from "../components/FAQ.jsx";
+import "../styles/Ruleta.css";
 
 const Ruleta = () => {
+  const { fetchWalletBalance } = useWallet(); // Usa el hook del contexto para obtener la función de actualización del monedero
   const [rotationDegrees, setRotationDegrees] = useState(0);
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [numberSpins, setNumberSpins] = useState(1);
@@ -54,21 +55,21 @@ const Ruleta = () => {
     [4, 21],
   ]);
 
-  // Estado para las cantidades de los campos de texto
   const [amounts, setAmounts] = useState(Array(5).fill(""));
   const [actualProfit, setActualProfit] = useState(0);
   const [actualLose, setActualLose] = useState(0);
   const [insufficientFunds, setInsufficientFunds] = useState(0);
   const [girando, setGirando] = useState(false);
 
-  // Función para actualizar el estado de las cantidades
   const handleAmountChange = async (index, value) => {
-    const response = await axios.get(`http://localhost:8081/wallet/${userId}`);
+    const response = await fetchWalletBalance(userId);
+    if (!response || !response.data || response.data.amount === undefined) {
+      console.error("Invalid response format:", response);
+      return; // Salir de la función si la respuesta no es válida
+    }
     const walletAmount = response.data.amount;
-    // eslint-disable-next-line no-undef
     if (index < 0 || index > 5) {
-      const totalAmount =
-        amounts[0] + amounts[1] + amounts[2] + amounts[3] + amounts[4];
+      const totalAmount = amounts.reduce((acc, curr) => acc + curr, 0);
       if (totalAmount > walletAmount) {
         setInsufficientFunds(true);
       } else {
@@ -80,7 +81,6 @@ const Ruleta = () => {
       newAmounts[index] = isNaN(parsedValue) ? 0 : parsedValue;
       setAmounts(newAmounts);
 
-      // Verificar si la cantidad ingresada es mayor que el saldo en la billetera
       const totalAmount = newAmounts.reduce((acc, curr) => acc + curr, 0);
       if (totalAmount > walletAmount) {
         setInsufficientFunds(true);
@@ -136,18 +136,25 @@ const Ruleta = () => {
     if (lose === "") lose = 0;
     setActualLose(lose);
     setActualProfit(profit);
-    const response = await axios.get(`http://localhost:8081/wallet/${userId}`);
-    const totalWalletMoney = response.data.amount + (profit - lose);
-    const values = { money: totalWalletMoney, id: userId };
-    axios
-      .post("http://localhost:8081/walletUpdate", values)
-      .then(() => {
-        setWalletMoney(totalWalletMoney);
-      })
-      .catch((err) => {
-        window.alert("Error al actualizar el wallet.");
-        console.log(err);
+
+    const response = await fetchWalletBalance(userId);
+    const currentBalance = response.data.amount;
+
+    // Calcula el nuevo saldo del monedero
+    const newBalance = currentBalance + profit - lose;
+
+    // Actualiza el saldo en el servidor
+    try {
+      await axios.post("http://localhost:8081/walletUpdate", {
+        money: newBalance,
+        id: userId,
       });
+
+      // Actualiza el saldo en el contexto solo después de que se actualiza en el servidor correctamente
+      fetchWalletBalance(userId);
+    } catch (error) {
+      console.error("Error updating wallet balance:", error);
+    }
   };
 
   useEffect(() => {
@@ -156,95 +163,90 @@ const Ruleta = () => {
         setGirando(false);
       }, 5100); // Espera 5 segundos, igual que la duración de la transición
       return () => clearTimeout(transitionTimer);
+    } else {
+      moneyGained(amounts);
     }
-    moneyGained(amounts);
-  }, [selectedNumber]);
+  }, [girando]);
 
   return (
     <>
       <Navbar />
-      <div style={{ backgroundColor: "#282828" }}>
-        <div style={{ backgroundColor: "#282828" }}>
-          <nav className="navbar navbar-expand-lg">
-            <div className="align-items-start">
-              <FAQ
-                FAQname={"¿CÓMO JUGAR?"}
-                FAQdescription={
-                  "HAZ TUS APUESTAS EN LOS CAMPOS ABAJO<br/>" +
-                  "CADA MULTIPLICADOR, MULTIPLICARÁ EL DINERO APOSTADO POR DICHO NÚMERO<br/>" +
-                  "DALE A GIRAR A LA RULETA"
-                }
-                FAQindex={6}
-              />
-            </div>
-          </nav>
-        </div>
-        <div
-          className="container d-flex flex-column align-items-center vh-100 position-relative"
-          style={{ backgroundColor: "#282828", marginBottom: "20px" }}
-        >
-          <img
-            className="position-absolute"
-            src={ruleta}
-            style={{
-              marginTop: "25px",
-              width: "35%",
-              transform: `rotate(${rotationDegrees}deg)`,
-              transition: "transform 5s ease",
-              zIndex: 1, //Asegura que la imagen de fondo esté detrás de la imagen superpuesta
-            }}
-            alt="Ruleta"
-          />
-          <img
-            src={estrella}
-            alt="Overlay"
-            className="position-absolute"
-            style={{
-              marginTop: "95px",
-              marginLeft: "10px",
-              width: "23%",
-              zIndex: 2,
-              cursor: "pointer", // Add cursor pointer to indicate it's clickable
-            }}
-            onClick={() => rouletteFunctioning()} // Move onClick event handler here
+      <div className="ruleta-page container">
+        <div className="faq-container">
+          <FAQ
+            FAQname={"¿CÓMO JUGAR?"}
+            FAQdescription={
+              "HAZ TUS APUESTAS EN LOS CAMPOS ABAJO<br/>" +
+              "CADA MULTIPLICADOR, MULTIPLICARÁ EL DINERO APOSTADO POR DICHO NÚMERO<br/>" +
+              "DALE A GIRAR A LA RULETA"
+            }
+            FAQindex={6}
           />
         </div>
-        <div
-          className="container d-flex flex-column align-items-center vh-100 position-relative"
-          style={{ backgroundColor: "#282828", marginTop: "-230px" }}
-        >
-          {amounts.map((value, index) => (
-            <div key={index} className="text-white">
-              Apuestas al X{seccionesMap.get(index)}:{" "}
-              <input
-                type="number"
-                value={parseInt(value)}
-                onChange={(e) => handleAmountChange(index, e.target.value)}
-                aria-label={`Apuestas al X${seccionesMap.get(index)}`}
-                style={{ margin: "5px" }}
+        <div className="row main-container">
+          <div className="col-12 col-lg-6 d-flex justify-content-center">
+            <div className="roulette-container position-relative">
+              <img
+                className="roulette img-fluid"
+                src={ruleta}
+                style={{
+                  transform: `rotate(${rotationDegrees}deg)`,
+                  transition: "transform 5s ease",
+                }}
+                alt="Ruleta"
+              />
+              <img
+                className="star position-absolute"
+                src={estrella}
+                alt="Overlay"
+                onClick={rouletteFunctioning}
+                aria-label="Girar ruleta"
+                role="button"
               />
             </div>
-          ))}
-          {insufficientFunds && (
-            <div style={{ color: "red" }} aria-label="Fondos insuficientes">
-              ¡Fondos Insuficientes!
-            </div>
-          )}
-          {/* Botón */}
-          <button
-            onClick={() => rouletteFunctioning()}
-            disabled={insufficientFunds || girando}
-            aria-label="Girar ruleta"
-            tabIndex={0}
-          >
-            Girar ruleta
-          </button>
-          <p className="text-white" aria-label={`Has ganado ${actualProfit}`}>
-            Has Ganado: {actualProfit}
-          </p>
-          <p className="text-white" aria-label={`Has perdido ${actualLose}`}>
-            Has Perdido: {actualLose}
-          </p>
+          </div>
+          <div className="col-12 col-lg-6 bets-container d-flex flex-column align-items-center align-items-lg-start">
+            {amounts.map((value, index) => (
+              <div key={index} className="bet-input mb-3">
+                <label
+                  htmlFor={`bet-${index}`}
+                  className="text-white form-label"
+                >
+                  Apuestas al X{seccionesMap.get(index)}:
+                </label>
+                <input
+                  id={`bet-${index}`}
+                  type="number"
+                  className="form-control"
+                  value={parseInt(value)}
+                  onChange={(e) => handleAmountChange(index, e.target.value)}
+                  aria-label={`Apuestas al X${seccionesMap.get(index)}`}
+                />
+              </div>
+            ))}
+            {insufficientFunds && (
+              <div style={{ color: "red" }} aria-label="Fondos insuficientes">
+                ¡Fondos Insuficientes!
+              </div>
+            )}
+            <button
+              className="btn btn-primary mt-3"
+              onClick={rouletteFunctioning}
+              disabled={insufficientFunds || girando}
+              aria-label="Girar ruleta"
+            >
+              Girar ruleta
+            </button>
+            <p
+              className="text-white mt-3"
+              aria-label={`Has ganado ${actualProfit}`}
+            >
+              Has Ganado: {actualProfit}
+            </p>
+            <p className="text-white" aria-label={`Has perdido ${actualLose}`}>
+              Has Perdido: {actualLose}
+            </p>
+          </div>
         </div>
       </div>
       <Footer />

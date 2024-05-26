@@ -1,0 +1,21 @@
+.slot {
+  font-size: 4rem;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: transform 1s ease-out;
+}
+
+.slot.rolling {
+  animation: roll 2s ease-out infinite;
+}
+
+@keyframes roll {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}

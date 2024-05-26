@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import StarlightLogo from "../assets/logo.png";
 import { BsInfoCircle } from "react-icons/bs";
-import axios from "axios";
-
-export let setWalletMoney;
+import { useWallet } from "../context/WalletContext";
 
 function Navbar() {
-  const [walletAmount, setWalletAmount] = useState(0);
-
-  setWalletMoney = setWalletAmount;
+  const { walletBalance, fetchWalletBalance } = useWallet();
 
   useEffect(() => {
-    fetchWalletAmount();
-  }, []);
+    const userId = localStorage.getItem("userId");
 
-  const fetchWalletAmount = async () => {
-    try {
-      const userId = localStorage.getItem("userId");
-      const response = await axios.get(
-        `http://localhost:8081/wallet/${userId}`
-      );
-      setWalletAmount(response.data.amount);
-    } catch (error) {
-      console.error("Error fetching wallet amount:", error);
+    if (userId) {
+      fetchWalletBalance(userId);
     }
-  };
+  }, [fetchWalletBalance]);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userId");
-    setWalletAmount(0);
     window.location.href = "/";
   };
 
@@ -80,8 +67,11 @@ function Navbar() {
             <div style={{ fontFamily: "Outfit", fontWeight: "500" }}>
               <p className="fs-4 mb-0 mt-0">Monedero</p>
               <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
-                <div className="bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2">
-                  {walletAmount.toFixed(2)}€
+                <div className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2">
+                  {walletBalance !== undefined
+                    ? walletBalance.toFixed(2)
+                    : "0.00"}
+                  €
                 </div>
                 <Link
                   to="/shop"
@@ -107,7 +97,7 @@ function Navbar() {
         <div className="d-flex flex-column flex-lg-row align-items-center mt-2 mt-lg-0">
           {localStorage.getItem("isLoggedIn") ? (
             <button
-              className="btn me-2 mb-2 "
+              className="btn me-2 mb-2"
               style={{ backgroundColor: "#BB9D0A" }}
               onClick={handleLogout}
               aria-label="Cerrar sesión"
