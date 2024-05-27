@@ -57,7 +57,6 @@
   }
 }
 
-/* Add this to your existing CSS file */
 .pulsate {
   top: 20%;
   left: 50%;
@@ -65,7 +64,7 @@
   z-index: 2;
   width: 50%;
   cursor: pointer;
-  animation: pulsate 1s ease-in-out infinite;
+  animation: pulsate 0.5s ease-in-out infinite; /* Adjust the animation duration */
 }
 
 @keyframes pulsate {
@@ -79,7 +78,7 @@
     transform: scale(0.9);
   }
 }
-/* Dentro del archivo de estilos Ruleta.css */
+
 .bet-button {
   margin-left: 10px;
   background-color: white;
