@@ -131,6 +131,7 @@ function ShopOpciones() {
                 setAmountToAdd(e.target.value);
                 setErrorMessage("");
               }}
+              min="0"
             />
             <div
               style={{
