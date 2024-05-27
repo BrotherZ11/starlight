@@ -42,13 +42,13 @@ function Navbar() {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div
-        className="collapse navbar-collapse justify-content-between"
+        className="collapse navbar-collapse justify-content-between "
         id="navbarNav"
       >
         <ul className="navbar-nav">
-          <li className="nav-item">
+          <li className="nav-item d-flex flex-column align-items-end">
             <button
-              className="btn btn-sm btn-outline-light position-fixed bottom-90px end-0  me-2"
+              className="btn btn-sm btn-outline-light position-absolute align-items-end me-2" style = {{position: "absolute", right: "0"}}
               tabIndex={-1}
               aria-label="Ayuda"
             >
