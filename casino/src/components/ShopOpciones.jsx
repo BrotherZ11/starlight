@@ -28,7 +28,11 @@ function ShopOpciones() {
   const confirmAddAmount = async () => {
     try {
       const userId = localStorage.getItem("userId");
-      await addAmountToWallet(userId, parseFloat(amountToAdd));
+      const currentBalanceResponse = await axios.get(`http://localhost:8081/wallet/${userId}`);
+      const currentBalance = currentBalanceResponse.data.amount;
+      const parsedAmount = parseFloat(amountToAdd);
+      const newTotal = currentBalance + parsedAmount;
+      await addAmountToWallet(userId, newTotal);
       localStorage.setItem("showSuccessMessage", "true");
       setShowSuccessMessage(true);
       setShowConfirmation(false);
@@ -36,6 +40,7 @@ function ShopOpciones() {
       console.error("Error adding money:", error);
     }
   };
+  
 
   const handleAmountSelection = (amount) => {
     setSelectedAmount(amount);

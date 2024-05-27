@@ -86,3 +86,6 @@
   color: black;
 }
 
+.non-clickable {
+  pointer-events: none;
+}
