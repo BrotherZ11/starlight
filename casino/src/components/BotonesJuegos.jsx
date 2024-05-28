@@ -14,9 +14,9 @@ function BotonesJuegos() {
             tabIndex={-1}
           >
             <img src={Ruleta} className="img-fluid" alt="Ruleta" />
-            <span className="position-absolute text-black h2 top-50 start-50 translate-middle">
+            {/* <span className="position-absolute text-black h2 top-50 start-50 translate-middle">
               RULETA
-            </span>
+            </span> */}
           </button>
         </Link>
       </div>
@@ -28,9 +28,9 @@ function BotonesJuegos() {
             tabIndex={-1}
           >
             <img src={Slots} className="img-fluid" alt="Slots" />
-            <span className="position-absolute text-black h2 top-50 start-50 translate-middle">
+            {/* <span className="position-absolute text-black h2 top-50 start-50 translate-middle">
               TRAGAPERRAS
-            </span>
+            </span> */}
           </button>
         </Link>
       </div>

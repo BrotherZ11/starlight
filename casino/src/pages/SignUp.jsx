@@ -320,6 +320,7 @@ const SignUp = () => {
 
                       <button
                         type="button"
+                        aria-label="mostrar contraseña"
                         onClick={togglePasswordVisibility}
                         className="btn btn-dark"
                       >
@@ -374,6 +375,7 @@ const SignUp = () => {
                         aria-label="confirmar contraseña"
                       />
                       <button
+                        aria-label="mostrar contraseña"
                         type="button"
                         onClick={toggleConfirmPasswordVisibility}
                         className="btn btn-dark"

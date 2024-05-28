@@ -30,6 +30,7 @@ export async function validateFirstForm(values) {
       errors.confirmPassword = "Confirm Password is required";
     } else if (values.password !== values.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
+      window.alert("Las contraseñas son diferentes")
     }
   
     return errors;
@@ -89,6 +90,7 @@ export async function validateSecondForm(values){
             age--;
         }
         if (age < 18) {
+          error.date = "Debes ser mayor de 18 años"
             window.alert("Debes ser mayor de 18 años")
         } else {
             error.date = "";

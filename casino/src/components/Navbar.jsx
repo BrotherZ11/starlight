@@ -48,7 +48,8 @@ function Navbar() {
         <ul className="navbar-nav">
           <li className="nav-item d-flex flex-column align-items-end">
             <button
-              className="btn btn-sm btn-outline-light position-absolute align-items-end me-2" style = {{position: "absolute", right: "0"}}
+              className="btn btn-sm btn-outline-light position-absolute align-items-end me-2"
+              style={{ position: "absolute", right: "0" }}
               tabIndex={-1}
               aria-label="Ayuda"
             >
@@ -136,7 +137,7 @@ function Navbar() {
                   className="text-white text-decoration-none"
                   tabIndex={0}
                 >
-                  Regístrate
+                  Registro
                 </Link>
               </button>
             </>
