@@ -20,6 +20,11 @@ function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/slots" className="text-dark">
+                  Slots
+                </Link>
+              </li>
+              <li>
                 <Link to="/shop" className="text-dark">
                   Tienda
                 </Link>

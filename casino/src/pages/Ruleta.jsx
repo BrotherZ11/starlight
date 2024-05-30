@@ -253,7 +253,7 @@ const Ruleta = () => {
             <FAQ
               FAQname={"¿CÓMO JUGAR?"}
               FAQdescription={
-                "HAZ TUS APUESTAS EN LOS CAMPOS ABAJO<br/>" +
+                "HAZ TUS APUESTAS EN LOS CAMPOS DE ABAJO<br/>" +
                 "CADA MULTIPLICADOR, MULTIPLICARÁ EL DINERO APOSTADO POR DICHO NÚMERO<br/>" +
                 "DALE A GIRAR A LA RULETA"
               }
@@ -356,7 +356,7 @@ const Ruleta = () => {
                       className="form-control"
                       value={parseInt(value)}
                       onChange={(e) => handleAmountChange(index, e.target.value)}
-                      aria-label={`Apuestas al X${seccionesMap.get(index)}`}
+                      aria-label={`Apuestas al por${seccionesMap.get(index)}`}
                       min="0" 
                       disabled={girando || showX2 || showX4 || showX6 || showX11 || showX21} 
                     />
@@ -405,11 +405,11 @@ const Ruleta = () => {
               </button>
               <p
                 className="text-white mt-3"
-                aria-label={`Has ganado ${actualProfit}`}
+                aria-live={`Has ganado ${actualProfit}`}
               >
                 Has Ganado: {actualProfit}
               </p>
-              <p className="text-white" aria-label={`Has perdido ${actualLose}`}>
+              <p className="text-white" aria-live={`Has perdido ${actualLose}`}>
                 Has Perdido: {actualLose}
               </p>
             </div>
