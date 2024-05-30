@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Tienda_10 from "../assets/Tienda_10.png";
 import Tienda_50 from "../assets/Tienda_50.png";
 import Tienda_100 from "../assets/Tienda_100.png";
@@ -13,6 +13,9 @@ function ShopOpciones() {
     localStorage.getItem("showSuccessMessage") === "true"
   );
   const [errorMessage, setErrorMessage] = useState("");
+  const [ariaMessage, setAriaMessage] = useState("");
+
+  const ariaLiveRef = useRef();
 
   const { addAmountToWallet } = useWallet();
 
@@ -23,6 +26,7 @@ function ShopOpciones() {
       return;
     }
     setShowConfirmation(true);
+    setAriaMessage("Va a dejar la página para pagar.");
   };
 
   const confirmAddAmount = async () => {
@@ -40,7 +44,6 @@ function ShopOpciones() {
       console.error("Error adding money:", error);
     }
   };
-  
 
   const handleAmountSelection = (amount) => {
     setSelectedAmount(amount);
@@ -147,6 +150,7 @@ function ShopOpciones() {
               className="btn btn-primary text-white text-decoration-none"
               style={{ backgroundColor: "#BB9D0A" }}
               onClick={handleAddAmount}
+              aria-label="añadir cantidad"
             >
               Añadir cantidad
             </button>
@@ -176,8 +180,8 @@ function ShopOpciones() {
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div className="modal-body">
-                  Va dejar la página para pagar, ¿desea seguir con la compra?
+                <div className="modal-body" aria-live="assertive">
+                  Va a dejar la página para pagar, ¿desea seguir con la compra?
                 </div>
                 <div className="modal-footer">
                   <button
@@ -200,9 +204,17 @@ function ShopOpciones() {
           </div>
           {showSuccessMessage && (
             <div className="alert alert-success mt-3" role="alert">
-              El dinero ha sido añadido.
+              Se han añadido {selectedAmount}€.
             </div>
           )}
+          <div
+            ref={ariaLiveRef}
+            aria-live="polite"
+            aria-atomic="true"
+            className="sr-only"
+          >
+            {ariaMessage}
+          </div>
         </div>
       </div>
     </div>
