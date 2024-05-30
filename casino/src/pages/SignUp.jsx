@@ -252,6 +252,9 @@ const SignUp = () => {
                       <span className="text-danger"> {errors.date}</span>
                     )} */}
                   </div>
+
+                  {/* Boton volver */}
+                  <div className="d-flex justify-content-between">
                     {/* Boton Registrarse */}
                     <button
                       type="submit"
@@ -259,8 +262,6 @@ const SignUp = () => {
                     >
                       Registrarse
                     </button>
-                  {/* Boton volver */}
-                  <div className="d-flex justify-content-between">
                     <button
                       type="button"
                       className="btn btn-secondary px-6 py-2 rounded font-bold"
