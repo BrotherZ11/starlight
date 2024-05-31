@@ -32,7 +32,9 @@ function ShopOpciones() {
   const confirmAddAmount = async () => {
     try {
       const userId = localStorage.getItem("userId");
-      const currentBalanceResponse = await axios.get(`http://localhost:8081/wallet/${userId}`);
+      const currentBalanceResponse = await axios.get(
+        `https://interfaces-425016.ew.r.appspot.com/wallet/${userId}`
+      );
       const currentBalance = currentBalanceResponse.data.amount;
       const parsedAmount = parseFloat(amountToAdd);
       const newTotal = currentBalance + parsedAmount;

@@ -12,7 +12,7 @@ export const WalletProvider = ({ children }) => {
   const fetchWalletBalance = async (userId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8081/wallet/${userId}`
+        `https://interfaces-425016.ew.r.appspot.com/wallet/${userId}`
       );
       if (response.data && response.data.amount !== undefined) {
         setWalletBalance(response.data.amount);
@@ -28,10 +28,13 @@ export const WalletProvider = ({ children }) => {
   // Función para añadir dinero al monedero
   const addAmountToWallet = async (userId, amount) => {
     try {
-      const response = await axios.post("http://localhost:8081/wallet/add", {
-        userId: userId,
-        amountToAdd: amount,
-      });
+      const response = await axios.post(
+        "https://interfaces-425016.ew.r.appspot.com/wallet/add",
+        {
+          userId: userId,
+          amountToAdd: amount,
+        }
+      );
       // Actualizar el balance del monedero después de añadir dinero
       await fetchWalletBalance(userId);
       return response.data;

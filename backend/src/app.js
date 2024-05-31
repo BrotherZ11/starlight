@@ -7,13 +7,13 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-const port = 8081;
+const port = process.env.PORT || 8081;
 
 const db = mysql.createConnection({
-  host: '34.38.1.96',
-  user: 'root',
-  password: '',
-  database: 'casino'
+  host: process.env.DB_HOST || '34.38.1.96',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'casino'
 });
 
 db.connect((err) => {
