@@ -291,6 +291,7 @@ const Ruleta = () => {
                       marginLeft: "50%"
                     }}
                     aria-label="multiplicado por 2"
+                    aria-live="assertive"
                   />
                 )}
                 {showX4 && (
@@ -303,6 +304,7 @@ const Ruleta = () => {
                       marginLeft: "50%"
                     }}
                     aria-label="multiplicado por 4"
+                    aria-live="assertive"
                   />
                 )}
                 {showX6 && (
@@ -315,6 +317,7 @@ const Ruleta = () => {
                       marginLeft: "50%"
                     }}
                     aria-label="multiplicado por 6"
+                    aria-live="assertive"
                   />
                 )}
                 {showX11 && (
@@ -327,6 +330,7 @@ const Ruleta = () => {
                       marginLeft: "50%"
                     }}
                     aria-label="multiplicado por 11"
+                    aria-live="assertive"
                   />
                 )}
                 {showX21 && (
@@ -339,6 +343,7 @@ const Ruleta = () => {
                       marginLeft: "50%"
                     }}
                     aria-label="multiplicado por 21"
+                    aria-live="assertive"
                   />
                 )}
               </div>
@@ -405,11 +410,13 @@ const Ruleta = () => {
               </button>
               <p
                 className="text-white mt-3"
-                aria-live={`Has ganado ${actualProfit}`}
+                aria-live="assertive"
               >
                 Has Ganado: {actualProfit}
               </p>
-              <p className="text-white" aria-live={`Has perdido ${actualLose}`}>
+              <p 
+                className="text-white" 
+                aria-live="assertive">
                 Has Perdido: {actualLose}
               </p>
             </div>
