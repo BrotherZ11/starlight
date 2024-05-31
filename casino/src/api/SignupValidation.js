@@ -11,7 +11,7 @@ export async function validateFirstForm(values) {
         errors.email = "Invalid email format";
       } else {
         try {
-          const response = await axios.post("http://localhost:8081/checkEmail", { email: values.email });
+          const response = await axios.post("https://interfaces-425016.ew.r.appspot.com/checkEmail", { email: values.email });
           if (response.data.exists) {
             window.alert("El email ya ha sido utilizado")
           }

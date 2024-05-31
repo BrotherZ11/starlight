@@ -6,7 +6,8 @@
 -- Tiempo de generación: 11-05-2024 a las 14:38:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
-
+CREATE DATABASE casino;
+USE casino;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";

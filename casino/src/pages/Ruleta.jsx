@@ -18,7 +18,7 @@ import x11Image from "../assets/x11.png";
 import x21Image from "../assets/x21.png";
 
 const Ruleta = () => {
-  const { fetchWalletBalance } = useWallet(); 
+  const { fetchWalletBalance } = useWallet();
   const [rotationDegrees, setRotationDegrees] = useState(0);
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [numberSpins, setNumberSpins] = useState(1);
@@ -26,7 +26,7 @@ const Ruleta = () => {
   const userId = localStorage.getItem("userId");
 
   const [audio] = useState(new Audio(mp3Sound));
-  const [showX2, setShowX2] = useState(false); 
+  const [showX2, setShowX2] = useState(false);
   const [showX4, setShowX4] = useState(false);
   const [showX6, setShowX6] = useState(false);
   const [showX11, setShowX11] = useState(false);
@@ -78,7 +78,7 @@ const Ruleta = () => {
     const response = await fetchWalletBalance(userId);
     if (!response || !response.data || response.data.amount === undefined) {
       console.error("Invalid response format:", response);
-      return; 
+      return;
     }
     const walletAmount = response.data.amount;
     if (index < 0 || index > 5) {
@@ -90,10 +90,10 @@ const Ruleta = () => {
       }
     } else {
       const newAmounts = [...amounts];
-      const parsedValue = Math.max(0, parseInt(value, 10)); 
+      const parsedValue = Math.max(0, parseInt(value, 10));
       newAmounts[index] = isNaN(parsedValue) ? 0 : parsedValue;
       setAmounts(newAmounts);
-  
+
       const totalAmount = newAmounts.reduce((acc, curr) => acc + curr, 0);
       if (totalAmount > walletAmount) {
         setInsufficientFunds(true);
@@ -102,7 +102,6 @@ const Ruleta = () => {
       }
     }
   };
-  
 
   const rotateImage = () => {
     const randomDegrees = Math.floor(Math.random() * 25) * sectionDegrees;
@@ -157,10 +156,13 @@ const Ruleta = () => {
     const newBalance = currentBalance + profit - lose;
 
     try {
-      await axios.post("http://localhost:8081/walletUpdate", {
-        money: newBalance,
-        id: userId,
-      });
+      await axios.post(
+        "https://interfaces-425016.ew.r.appspot.com/walletUpdate",
+        {
+          money: newBalance,
+          id: userId,
+        }
+      );
 
       fetchWalletBalance(userId);
     } catch (error) {
@@ -170,7 +172,15 @@ const Ruleta = () => {
 
   useEffect(() => {
     const handleSpaceKeyDown = (event) => {
-      if (event.code === "Space" && !girando && !showX2 && !showX4 && !showX6 && !showX11 && !showX21) {
+      if (
+        event.code === "Space" &&
+        !girando &&
+        !showX2 &&
+        !showX4 &&
+        !showX6 &&
+        !showX11 &&
+        !showX21
+      ) {
         event.preventDefault(); // Prevent the default behavior of the space key press
         rouletteFunctioning();
       }
@@ -192,7 +202,7 @@ const Ruleta = () => {
           setTimeout(() => {
             setShowX2(false);
             moneyGained(amounts);
-          }, 1500); 
+          }, 1500);
         } else if (selectedNumber === 4) {
           setShowX4(true);
           setTimeout(() => {
@@ -207,7 +217,7 @@ const Ruleta = () => {
           }, 1500);
         } else if (selectedNumber === 11) {
           setShowX11(true);
-          if (amounts[3] > 0) { 
+          if (amounts[3] > 0) {
             const x11Audio = new Audio(x11sound);
             x11Audio.play().catch((error) => {
               console.error("Failed to play the x11 audio:", error);
@@ -232,7 +242,7 @@ const Ruleta = () => {
         } else {
           moneyGained(amounts);
         }
-      }, 5100); 
+      }, 5100);
       return () => clearTimeout(transitionTimer);
     }
   }, [girando]);
@@ -246,7 +256,7 @@ const Ruleta = () => {
 
   return (
     <>
-      <div style = {{backgroundColor: "#282828"}}>
+      <div style={{ backgroundColor: "#282828" }}>
         <Navbar />
         <div className="ruleta-page container">
           <div className="faq-container">
@@ -273,10 +283,23 @@ const Ruleta = () => {
                   alt="Ruleta"
                 />
                 <img
-                  className={`star position-absolute ${girando || showX2 || showX4 || showX6 || showX11 || showX21 ? "disabled" : ""}`}
+                  className={`star position-absolute ${
+                    girando || showX2 || showX4 || showX6 || showX11 || showX21
+                      ? "disabled"
+                      : ""
+                  }`}
                   src={estrella}
                   alt="Overlay"
-                  onClick={!girando && !showX2 && !showX4 && !showX6 && !showX11 && !showX21 ? rouletteFunctioning : undefined}
+                  onClick={
+                    !girando &&
+                    !showX2 &&
+                    !showX4 &&
+                    !showX6 &&
+                    !showX11 &&
+                    !showX21
+                      ? rouletteFunctioning
+                      : undefined
+                  }
                   aria-label="Girar ruleta"
                   role="button"
                 />
@@ -288,7 +311,7 @@ const Ruleta = () => {
                     className="position-absolute pulsate non-clickable"
                     style={{
                       marginBottom: "100%",
-                      marginLeft: "50%"
+                      marginLeft: "50%",
                     }}
                     aria-label="multiplicado por 2"
                   />
@@ -300,7 +323,7 @@ const Ruleta = () => {
                     className="position-absolute pulsate non-clickable"
                     style={{
                       marginBottom: "100%",
-                      marginLeft: "50%"
+                      marginLeft: "50%",
                     }}
                     aria-label="multiplicado por 4"
                   />
@@ -312,7 +335,7 @@ const Ruleta = () => {
                     className="position-absolute pulsate non-clickable"
                     style={{
                       marginBottom: "100%",
-                      marginLeft: "50%"
+                      marginLeft: "50%",
                     }}
                     aria-label="multiplicado por 6"
                   />
@@ -324,7 +347,7 @@ const Ruleta = () => {
                     className="position-absolute pulsate non-clickable"
                     style={{
                       marginBottom: "100%",
-                      marginLeft: "50%"
+                      marginLeft: "50%",
                     }}
                     aria-label="multiplicado por 11"
                   />
@@ -336,7 +359,7 @@ const Ruleta = () => {
                     className="position-absolute pulsate non-clickable"
                     style={{
                       marginBottom: "100%",
-                      marginLeft: "50%"
+                      marginLeft: "50%",
                     }}
                     aria-label="multiplicado por 21"
                   />
@@ -346,7 +369,10 @@ const Ruleta = () => {
             <div className="col-12 col-lg-6 bets-container d-flex flex-column align-items-center align-items-lg-start">
               {amounts.map((value, index) => (
                 <div key={index} className="bet-input mb-3">
-                  <label htmlFor={`bet-${index}`} className="text-white form-label">
+                  <label
+                    htmlFor={`bet-${index}`}
+                    className="text-white form-label"
+                  >
                     Apuestas al X{seccionesMap.get(index)}:
                   </label>
                   <div className="input-group">
@@ -355,10 +381,19 @@ const Ruleta = () => {
                       type="number"
                       className="form-control"
                       value={parseInt(value)}
-                      onChange={(e) => handleAmountChange(index, e.target.value)}
+                      onChange={(e) =>
+                        handleAmountChange(index, e.target.value)
+                      }
                       aria-label={`Apuestas al por${seccionesMap.get(index)}`}
-                      min="0" 
-                      disabled={girando || showX2 || showX4 || showX6 || showX11 || showX21} 
+                      min="0"
+                      disabled={
+                        girando ||
+                        showX2 ||
+                        showX4 ||
+                        showX6 ||
+                        showX11 ||
+                        showX21
+                      }
                     />
 
                     <div className="input-group-append">
@@ -366,7 +401,14 @@ const Ruleta = () => {
                         className="btn btn-outline-secondary bet-button"
                         type="button"
                         onClick={() => handleAmountChange(index, 1)}
-                        disabled={girando || showX2 || showX4 || showX6 || showX11 || showX21} 
+                        disabled={
+                          girando ||
+                          showX2 ||
+                          showX4 ||
+                          showX6 ||
+                          showX11 ||
+                          showX21
+                        }
                       >
                         1€
                       </button>
@@ -374,7 +416,14 @@ const Ruleta = () => {
                         className="btn btn-outline-secondary bet-button"
                         type="button"
                         onClick={() => handleAmountChange(index, 5)}
-                        disabled={girando || showX2 || showX4 || showX6 || showX11 || showX21} 
+                        disabled={
+                          girando ||
+                          showX2 ||
+                          showX4 ||
+                          showX6 ||
+                          showX11 ||
+                          showX21
+                        }
                       >
                         5€
                       </button>
@@ -382,7 +431,14 @@ const Ruleta = () => {
                         className="btn btn-outline-secondary bet-button"
                         type="button"
                         onClick={() => handleAmountChange(index, 10)}
-                        disabled={girando || showX2 || showX4 || showX6 || showX11 || showX21} 
+                        disabled={
+                          girando ||
+                          showX2 ||
+                          showX4 ||
+                          showX6 ||
+                          showX11 ||
+                          showX21
+                        }
                       >
                         10€
                       </button>
@@ -398,7 +454,15 @@ const Ruleta = () => {
               <button
                 className="btn btn-primary mt-3"
                 onClick={rouletteFunctioning}
-                disabled={insufficientFunds || girando || showX2 || showX4 || showX6 || showX11 || showX21} 
+                disabled={
+                  insufficientFunds ||
+                  girando ||
+                  showX2 ||
+                  showX4 ||
+                  showX6 ||
+                  showX11 ||
+                  showX21
+                }
                 aria-label="Girar ruleta"
               >
                 Girar ruleta
