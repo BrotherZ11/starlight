@@ -6,7 +6,7 @@
   "homepage": "https://brotherz11.github.io/starlight",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build && cp 404.html build/",
+    "predeploy": "npm run build && copy 404.html build/",
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
