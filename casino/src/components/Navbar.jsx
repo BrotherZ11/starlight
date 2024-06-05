@@ -18,7 +18,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userId");
-    window.location.href = "/";
+    // window.location.href = "/starlight/"; // Redirigir a la subcarpeta 'starlight'
   };
 
   return (
@@ -104,6 +104,11 @@ function Navbar() {
               tabIndex={0}
               aria-label="Cerrar sesión"
             >
+              <Link
+                to={"/"}
+                className="text-white text-decoration-none"
+                tabIndex={0}
+              ></Link>
               Cerrar sesión
             </button>
           ) : (
