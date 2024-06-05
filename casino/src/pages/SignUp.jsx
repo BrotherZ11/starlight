@@ -418,7 +418,7 @@ const SignUp = () => {
                   <div className="mt-2">
                     <span className="text-white">
                       Si ya tienes una cuenta,{" "}
-                      <a href="/login">Inicia sesion</a>
+                      <Link to="/login">Inicia sesion</Link>
                     </span>
                   </div>
                 </form>
