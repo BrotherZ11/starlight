@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 function render(props) {
     return (
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#282828" }}>
+      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#212529" }}>
         <div className="container-fluid">
           <div className="align-items-start">
             <div className="btn-group">

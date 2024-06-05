@@ -66,9 +66,9 @@ function Navbar() {
         <div className="navbar-nav">
           <div className="d-flex flex-column align-items-center text-center text-lg-start">
             <div style={{ fontFamily: "Outfit", fontWeight: "500" }}>
-              <p className="fs-4 mb-0 mt-0">Monedero</p>
+              <p className="fs-4 mb-0 mt-0" aria-label="Monedero Título" tabIndex={0}>Monedero</p>
               <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
-                <div className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2">
+                <div className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2" aria-label={`Tienes ${walletBalance} euros`} tabIndex={0}>
                   {walletBalance !== undefined
                     ? walletBalance.toFixed(2)
                     : "0.00"}
@@ -84,7 +84,7 @@ function Navbar() {
                     tabIndex={-1}
                     aria-label="Tienda"
                     style={{
-                      backgroundColor: "#A46928",
+                      backgroundColor: "#212529",
                       border: "2px solid #A46928",
                     }}
                   >
@@ -99,7 +99,7 @@ function Navbar() {
           {localStorage.getItem("isLoggedIn") ? (
             <button
               className="btn me-2 mb-5"
-              style={{ backgroundColor: "#BB9D0A" }}
+              style={{ backgroundColor: "#212529" }}
               onClick={handleLogout}
               tabIndex={0}
               aria-label="Cerrar sesión"
@@ -116,7 +116,7 @@ function Navbar() {
               <button
                 className="btn mb-5"
                 aria-label="Inicio de sesión"
-                style={{ backgroundColor: "#BB9D0A" }}
+                style={{ backgroundColor: "#212529" }}
                 tabIndex={-1}
               >
                 <Link
@@ -133,7 +133,7 @@ function Navbar() {
                 style={{
                   marginLeft: "10px",
                   marginRight: "10px",
-                  backgroundColor: "#BB9D0A",
+                  backgroundColor: "#212529",
                 }}
                 tabIndex={-1}
               >

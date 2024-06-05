@@ -4,7 +4,7 @@ import { validateFirstForm, validateSecondForm } from "../api/SignupValidation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -120,6 +120,11 @@ const SignUp = () => {
   };
 
   return (
+    <>
+    <Helmet>
+        <title>Registro</title>
+    </Helmet>
+    
     <div className="container">
       <div className="row justify-content-center align-items-center min-vh-100">
         <div className="col-sm-10 col-md-8 col-lg-6">
@@ -389,16 +394,7 @@ const SignUp = () => {
                   {/* Términos y Condiciones */}
                   <div className="mb-4">
                     <div className="form-check">
-                      <input
-                        type="checkbox"
-                        name="terms"
-                        className="form-check-input"
-                        checked={termsChecked}
-                        onChange={toggleTerms}
-                        onKeyPress={handleKeyEnterPress}
-                        aria-label="Aceptar los términos y condiciones"
-                      />
-                      <label
+                    <label
                         htmlFor="terms"
                         className="form-check-label text-white"
                       >
@@ -407,6 +403,18 @@ const SignUp = () => {
                           términos y condiciones
                         </a>
                       </label>
+                      <input
+                        type="checkbox"
+                        name="terms"
+                        className="form-check-input"
+                        checked={termsChecked}
+                        onChange={toggleTerms}
+                        onKeyPress={handleKeyEnterPress}
+                        aria-label="Aceptar los términos y condiciones"
+                        aria-checked="false"
+                        aria-live="assertive"
+                      />
+                      
                     </div>
                   </div>
                   {/* Boton */}
@@ -419,7 +427,7 @@ const SignUp = () => {
                   <div className="mt-2">
                     <span className="text-white">
                       Si ya tienes una cuenta,{" "}
-                      <Link to="/login">Inicia sesion</Link>
+                      <a href="#/login">Inicia sesion</a>
                     </span>
                   </div>
                 </form>
@@ -429,6 +437,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

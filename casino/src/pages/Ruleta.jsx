@@ -17,6 +17,8 @@ import x6Image from "../assets/x6.png";
 import x11Image from "../assets/x11.png";
 import x21Image from "../assets/x21.png";
 
+import { Helmet } from "react-helmet";
+
 const Ruleta = () => {
   const { fetchWalletBalance } = useWallet();
   const [rotationDegrees, setRotationDegrees] = useState(0);
@@ -73,6 +75,7 @@ const Ruleta = () => {
   const [actualLose, setActualLose] = useState(0);
   const [insufficientFunds, setInsufficientFunds] = useState(false);
   const [girando, setGirando] = useState(false);
+  
 
   const handleAmountChange = async (index, value) => {
     const response = await fetchWalletBalance(userId);
@@ -254,9 +257,13 @@ const Ruleta = () => {
     };
   }, [audio]);
 
+  
   return (
       <>
-        <div style={{ backgroundColor: "#282828" }}>
+      <Helmet>
+        <title>Ruleta</title>
+      </Helmet>
+        <div style={{ backgroundColor: "#212529" }}>
           <Navbar />
           <div className="ruleta-page container">
             <div className="faq-container">
@@ -289,7 +296,7 @@ const Ruleta = () => {
                               : ""
                       }`}
                       src={estrella}
-                      alt="Overlay"
+                      alt="Ruleta girando"
                       onClick={
                         !insufficientFunds &&
                         !girando &&
