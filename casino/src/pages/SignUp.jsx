@@ -4,6 +4,7 @@ import { validateFirstForm, validateSecondForm } from "../api/SignupValidation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
