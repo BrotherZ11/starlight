@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useWallet } from "../context/WalletContext"; // Importar el hook useWallet
 import "../styles/Slots.css";
+import { Helmet } from "react-helmet";
 
 const SlotMachine = () => {
   const { walletBalance, addAmountToWallet, fetchWalletBalance } = useWallet();
@@ -40,6 +41,9 @@ const SlotMachine = () => {
   // JSX return
   return (
     <>
+    <Helmet>
+        <title>Tragaperras</title>
+    </Helmet>
       <Navbar />
       <div className="container text-center mt-5">
         <div className="row">

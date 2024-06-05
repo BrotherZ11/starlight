@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import Validation from "../api/LoginValidation";
+import { Helmet } from "react-helmet";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -66,6 +67,10 @@ function Login() {
   };
 
   return (
+    <>
+    <Helmet>
+        <title>Inicio de sesión</title>
+    </Helmet>
     <div className="container-fluid">
       <div className="row justify-content-center align-items-center min-vh-100">
         <div className="col-sm-8 col-md-6 col-lg-4">
@@ -154,6 +159,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

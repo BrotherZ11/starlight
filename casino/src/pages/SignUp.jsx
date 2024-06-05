@@ -4,6 +4,7 @@ import { validateFirstForm, validateSecondForm } from "../api/SignupValidation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -119,6 +120,11 @@ const SignUp = () => {
   };
 
   return (
+    <>
+    <Helmet>
+        <title>Registro</title>
+    </Helmet>
+    
     <div className="container">
       <div className="row justify-content-center align-items-center min-vh-100">
         <div className="col-sm-10 col-md-8 col-lg-6">
@@ -428,6 +434,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

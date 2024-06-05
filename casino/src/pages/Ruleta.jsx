@@ -17,6 +17,8 @@ import x6Image from "../assets/x6.png";
 import x11Image from "../assets/x11.png";
 import x21Image from "../assets/x21.png";
 
+import { Helmet } from "react-helmet";
+
 const Ruleta = () => {
   const { fetchWalletBalance } = useWallet();
   const [rotationDegrees, setRotationDegrees] = useState(0);
@@ -256,6 +258,9 @@ const Ruleta = () => {
 
   return (
       <>
+      <Helmet>
+        <title>Ruleta</title>
+      </Helmet>
         <div style={{ backgroundColor: "#282828" }}>
           <Navbar />
           <div className="ruleta-page container">

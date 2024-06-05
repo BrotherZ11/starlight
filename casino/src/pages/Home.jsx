@@ -4,10 +4,14 @@ import Carousel from "../components/Carousel";
 import FilterSearchBar from "../components/FilterSearchBar";
 import BotonesJuegos from "../components/BotonesJuegos";
 import Footer from "../components/Footer";
+import { Helmet } from "react-helmet";
 
 function Home() {
   return (
     <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Navbar />
       <div className="bg-dark pb-5" style={{ minHeight: "calc(100vh - 64px)" }}>
         <FilterSearchBar />
