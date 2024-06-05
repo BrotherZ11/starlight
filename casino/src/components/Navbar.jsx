@@ -18,7 +18,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userId");
-    // window.location.href = "/starlight/"; // Redirigir a la subcarpeta 'starlight'
+    window.location.href = "/starlight/";
   };
 
   return (
@@ -66,9 +66,19 @@ function Navbar() {
         <div className="navbar-nav">
           <div className="d-flex flex-column align-items-center text-center text-lg-start">
             <div style={{ fontFamily: "Outfit", fontWeight: "500" }}>
-              <p className="fs-4 mb-0 mt-0" aria-label="Monedero Título" tabIndex={0}>Monedero</p>
+              <p
+                className="fs-4 mb-0 mt-0"
+                aria-label="Monedero Título"
+                tabIndex={0}
+              >
+                Monedero
+              </p>
               <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
-                <div className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2" aria-label={`Tienes ${walletBalance} euros`} tabIndex={0}>
+                <div
+                  className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2"
+                  aria-label={`Tienes ${walletBalance} euros`}
+                  tabIndex={0}
+                >
                   {walletBalance !== undefined
                     ? walletBalance.toFixed(2)
                     : "0.00"}
@@ -98,7 +108,7 @@ function Navbar() {
         <div className="d-flex flex-column flex-lg-row align-items-center">
           {localStorage.getItem("isLoggedIn") ? (
             <button
-              className="btn me-2 mb-5"
+              className="btn me-2 mb-5 text-white"
               style={{ backgroundColor: "#212529" }}
               onClick={handleLogout}
               tabIndex={0}
