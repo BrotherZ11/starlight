@@ -98,7 +98,7 @@ function Navbar() {
         <div className="d-flex flex-column flex-lg-row align-items-center">
           {localStorage.getItem("isLoggedIn") ? (
             <button
-              className="btn me-2 mb-5"
+              className="btn me-2 mb-5 text-white"
               style={{ backgroundColor: "#212529" }}
               onClick={handleLogout}
               tabIndex={0}
