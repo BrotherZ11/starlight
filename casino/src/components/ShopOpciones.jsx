@@ -126,9 +126,10 @@ function ShopOpciones() {
         </div>
         <div className="col-12 mt-5">
           <div className="d-flex justify-content-center">
+            <label for="amountToAdd" className="text-white" aria-label="Añadir cantidad" style={{fontSize:"175%", marginTop:"1%", marginRight:"1%"}}>Añadir cantidad:</label>
             <input
               type="number"
-              placeholder="Añade una cantidad"
+              id="amountToAdd"
               className="form-control form-control-lg mr-2"
               style={{ maxWidth: "300px" }}
               value={amountToAdd}
@@ -138,6 +139,7 @@ function ShopOpciones() {
               }}
               min="0"
             />
+            
             <div
               style={{
                 backgroundColor: "transparent",

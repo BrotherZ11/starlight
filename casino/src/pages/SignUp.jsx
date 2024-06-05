@@ -394,6 +394,15 @@ const SignUp = () => {
                   {/* Términos y Condiciones */}
                   <div className="mb-4">
                     <div className="form-check">
+                    <label
+                        htmlFor="terms"
+                        className="form-check-label text-white"
+                      >
+                        Tengo 18 y acepto los{" "}
+                        <a href="https://drive.google.com/file/d/19_fFcDUj8Yg_q6Ma0S8pdOmwTd-5YPAu/view?usp=drive_link">
+                          términos y condiciones
+                        </a>
+                      </label>
                       <input
                         type="checkbox"
                         name="terms"
@@ -403,15 +412,7 @@ const SignUp = () => {
                         onKeyPress={handleKeyEnterPress}
                         aria-label="Aceptar los términos y condiciones"
                       />
-                      <label
-                        htmlFor="terms"
-                        className="form-check-label text-white"
-                      >
-                        Tengo 18 y acepto los{" "}
-                        <a href="https://drive.google.com/file/d/19_fFcDUj8Yg_q6Ma0S8pdOmwTd-5YPAu/view?usp=drive_link">
-                          términos y condiciones
-                        </a>
-                      </label>
+                      
                     </div>
                   </div>
                   {/* Boton */}
