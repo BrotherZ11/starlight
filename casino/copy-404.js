@@ -1,7 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Define las rutas del archivo fuente y destino
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const sourcePath = path.join(__dirname, '404.html');
 const destinationPath = path.join(__dirname, 'dist', '404.html');
 
