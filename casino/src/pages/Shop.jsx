@@ -11,7 +11,7 @@ function Shop() {
     <Helmet>
         <title>Tienda</title>
     </Helmet>
-      <div style={{ backgroundColor: "#282828", minHeight: "100vh" }}>
+      <div style={{ backgroundColor: "#212529", minHeight: "100vh" }}>
         <Navbar />
         <div>
           <div className="mt-5 mb-2">

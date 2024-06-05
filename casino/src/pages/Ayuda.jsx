@@ -11,7 +11,7 @@ function Ayuda() {
                 <title>Ayuda</title>
             </Helmet>
             <div style={{ 
-                backgroundColor: "#282828",
+                backgroundColor: "#212529",
                 minHeight: "100vh" 
             }}>
                 <Navbar />

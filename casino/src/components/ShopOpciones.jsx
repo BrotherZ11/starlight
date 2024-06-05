@@ -65,7 +65,7 @@ function ShopOpciones() {
           <button
             className="btn btn-primary w-100 mb-2"
             style={{
-              backgroundColor: "#E0C439",
+              backgroundColor: "#e4a700",
               color: "black",
               border: "#E0C439",
             }}
@@ -86,7 +86,7 @@ function ShopOpciones() {
           <button
             className="btn btn-primary w-100 mb-2"
             style={{
-              backgroundColor: "#E0C439",
+              backgroundColor: "#e4a700",
               color: "black",
               border: "#E0C439",
             }}
@@ -107,7 +107,7 @@ function ShopOpciones() {
           <button
             className="btn btn-primary w-100 mb-2"
             style={{
-              backgroundColor: "#E0C439",
+              backgroundColor: "#e4a700",
               color: "black",
               border: "#E0C439",
             }}
@@ -150,7 +150,7 @@ function ShopOpciones() {
             </div>
             <button
               className="btn btn-primary text-white text-decoration-none"
-              style={{ backgroundColor: "#BB9D0A" }}
+              style={{ backgroundColor: "#e4a700", border: "#e4a700" }}
               onClick={handleAddAmount}
               aria-label="añadir cantidad"
             >

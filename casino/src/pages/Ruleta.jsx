@@ -261,7 +261,7 @@ const Ruleta = () => {
       <Helmet>
         <title>Ruleta</title>
       </Helmet>
-        <div style={{ backgroundColor: "#282828" }}>
+        <div style={{ backgroundColor: "#212529" }}>
           <Navbar />
           <div className="ruleta-page container">
             <div className="faq-container">
@@ -294,7 +294,7 @@ const Ruleta = () => {
                               : ""
                       }`}
                       src={estrella}
-                      alt="Overlay"
+                      alt="Ruleta girando"
                       onClick={
                         !insufficientFunds &&
                         !girando &&
