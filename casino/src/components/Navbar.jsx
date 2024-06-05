@@ -66,9 +66,9 @@ function Navbar() {
         <div className="navbar-nav">
           <div className="d-flex flex-column align-items-center text-center text-lg-start">
             <div style={{ fontFamily: "Outfit", fontWeight: "500" }}>
-              <p className="fs-4 mb-0 mt-0">Monedero</p>
+              <p className="fs-4 mb-0 mt-0" aria-label="Monedero Título" tabIndex={0}>Monedero</p>
               <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
-                <div className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2">
+                <div className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2" aria-label={`Tienes ${walletBalance} euros`} tabIndex={0}>
                   {walletBalance !== undefined
                     ? walletBalance.toFixed(2)
                     : "0.00"}

@@ -75,6 +75,7 @@ const Ruleta = () => {
   const [actualLose, setActualLose] = useState(0);
   const [insufficientFunds, setInsufficientFunds] = useState(false);
   const [girando, setGirando] = useState(false);
+  
 
   const handleAmountChange = async (index, value) => {
     const response = await fetchWalletBalance(userId);
@@ -256,6 +257,7 @@ const Ruleta = () => {
     };
   }, [audio]);
 
+  
   return (
       <>
       <Helmet>

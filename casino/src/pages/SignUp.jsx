@@ -411,6 +411,8 @@ const SignUp = () => {
                         onChange={toggleTerms}
                         onKeyPress={handleKeyEnterPress}
                         aria-label="Aceptar los términos y condiciones"
+                        aria-checked="false"
+                        aria-live="assertive"
                       />
                       
                     </div>
