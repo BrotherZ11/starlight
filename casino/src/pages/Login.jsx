@@ -145,7 +145,7 @@ function Login() {
                 </button>
                 <div className="mt-2">
                   <span className="text-white">
-                    Si no tienes una cuenta, <a href="#/signup">regístrate</a>
+                    Si no tienes una cuenta, <a href="/signup">regístrate</a>
                   </span>
                 </div>
               </form>
