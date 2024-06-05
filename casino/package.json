@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://brotherz11.github.io/starlight",
+  "homepage": "https://BrotherZ11.github.io/starlight",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build && node copy-404.js",
