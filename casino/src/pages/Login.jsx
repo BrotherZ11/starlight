@@ -68,97 +68,103 @@ function Login() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Inicio de sesión</title>
-    </Helmet>
-    <div className="container-fluid">
-      <div className="row justify-content-center align-items-center min-vh-100">
-        <div className="col-sm-8 col-md-6 col-lg-4">
-          <div className="card bg-transparent border-1 border-light">
-            <div className="card-body">
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2 className="card-title text-white ">Iniciar sesión</h2>
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  onClick={() => navigate("/")}
-                  aria-label="Cancelar"
-                >
-                  <MdCancel className="text-white" size={24} />
-                </button>
-              </div>
-
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className={`form-label ${
-                      errors.email ? "text-danger" : "text-warning "
-                    }`}
+      </Helmet>
+      <div className="container-fluid">
+        <div className="row justify-content-center align-items-center min-vh-100">
+          <div className="col-sm-8 col-md-6 col-lg-4">
+            <div className="card bg-transparent border-1 border-light">
+              <div className="card-body">
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <h1 className="card-title text-white ">Iniciar sesión</h1>
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={() => navigate("/")}
+                    aria-label="Cancelar"
                   >
-                    Email {errors.email && <span>*</span>}
-                  </label>
-                  <input
-                    aria-label="Email"
-                    type="email"
-                    className={`form-control ${
-                      errors.email ? "is-invalid" : ""
-                    }`}
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
+                    <MdCancel className="text-white" size={24} />
+                  </button>
                 </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="password"
-                    className={`form-label ${
-                      errors.password ? "text-danger" : "text-warning"
-                    }`}
-                  >
-                    Contraseña {errors.password && <span>*</span>}
-                  </label>
-                  <div className="input-group">
-                    <input
-                      aria-label="Contraseña"
-                      type={showPassword ? "text" : "password"}
-                      className={`form-control ${
-                        errors.password ? "is-invalid" : ""
+
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <label
+                      name="email"
+                      htmlFor="email"
+                      className={`form-label ${
+                        errors.email ? "text-danger" : "text-warning "
                       }`}
-                      name="password"
-                      value={formData.password}
+                    >
+                      Email {errors.email && <span>*</span>}
+                    </label>
+                    <input
+                      aria-label="Email"
+                      type="email"
+                      className={`form-control ${
+                        errors.email ? "is-invalid" : ""
+                      }`}
+                      name="email"
+                      value={formData.email}
                       onChange={handleChange}
                     />
-                    <button
-                      aria-label="Mostrar contraseña"
-                      type="button"
-                      className="btn btn-dark"
-                      onClick={togglePasswordVisibility}
+                  </div>
+                  <div className="mb-4">
+                    <label
+                      name="password"
+                      htmlFor="password"
+                      className={`form-label ${
+                        errors.password ? "text-danger" : "text-warning"
+                      }`}
                     >
-                      <FaEye />
-                    </button>
+                      Contraseña {errors.password && <span>*</span>}
+                    </label>
+                    <div className="input-group">
+                      <input
+                        aria-label="Contraseña"
+                        type={showPassword ? "text" : "password"}
+                        className={`form-control ${
+                          errors.password ? "is-invalid" : ""
+                        }`}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+                      <button
+                        aria-label="Mostrar contraseña"
+                        type="button"
+                        style={{ border: "2px solid #212529" }}
+                        className="btn btn-dark border-1 border-light"
+                        onClick={togglePasswordVisibility}
+                      >
+                        <FaEye />
+                      </button>
+                    </div>
                   </div>
-                </div>
-                {errors.login && (
-                  <div className="alert alert-danger" role="alert">
-                    {errors.login}
+                  {errors.login && (
+                    <div className="alert alert-danger" role="alert">
+                      {errors.login}
+                    </div>
+                  )}
+                  {/* Boton */}
+                  <button type="submit" className="btn btn-warning yellow-600">
+                    Iniciar sesión
+                  </button>
+                  <div className="mt-2">
+                    <span className="text-white">
+                      Si no tienes una cuenta,{" "}
+                      <a href="#/signup" style={{ color: "#448EFD" }}>
+                        regístrate
+                      </a>
+                    </span>
                   </div>
-                )}
-                {/* Boton */}
-                <button type="submit" className="btn btn-warning yellow-600">
-                  Iniciar sesión
-                </button>
-                <div className="mt-2">
-                  <span className="text-white">
-                    Si no tienes una cuenta, <a href="#/signup">regístrate</a>
-                  </span>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
