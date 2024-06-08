@@ -5,6 +5,7 @@ import { FaEye } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import Validation from "../api/LoginValidation";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -106,6 +107,7 @@ function Login() {
                         errors.email ? "is-invalid" : ""
                       }`}
                       name="email"
+                      id="email"
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -128,6 +130,7 @@ function Login() {
                           errors.password ? "is-invalid" : ""
                         }`}
                         name="password"
+                        id="password"
                         value={formData.password}
                         onChange={handleChange}
                       />
@@ -154,9 +157,9 @@ function Login() {
                   <div className="mt-2">
                     <span className="text-white">
                       Si no tienes una cuenta,{" "}
-                      <a href="#/signup" style={{ color: "#448EFD" }}>
+                      <Link to="/signup" style={{ color: "#81B3E7" }}>
                         regístrate
-                      </a>
+                      </Link>
                     </span>
                   </div>
                 </form>

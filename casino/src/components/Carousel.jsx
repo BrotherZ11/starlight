@@ -21,20 +21,24 @@ function Carousel() {
                 aria-label="Ir a ruleta"
                 tabIndex={0}
               >
-                JUEGA AHORA
+                JUGAR RULETA
               </button>
             </Link>
           </div>
           <div className="carousel-item">
-            <img src={Slots} className="d-block w-100" alt="Slide Tragaperras" />
+            <img
+              src={Slots}
+              className="d-block w-100"
+              alt="Slide Tragaperras"
+            />
             <Link to={"/slots"} className="stretched-link">
-            <button
-              className="btn btn-success btn-sm position-absolute bottom-0 start-50 translate-middle-x"
-              aria-label="Ir a tragaperras"
-              tabIndex={0}
-            >
-              JUEGA AHORA
-            </button>
+              <button
+                className="btn btn-success btn-sm position-absolute bottom-0 start-50 translate-middle-x"
+                aria-label="Ir a tragaperras"
+                tabIndex={0}
+              >
+                JUGAR TRAGAPERRAS
+              </button>
             </Link>
           </div>
         </div>

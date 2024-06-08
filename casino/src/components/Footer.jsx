@@ -7,7 +7,7 @@ function Footer() {
       <div className="container">
         <div className="row">
           <div className="col-12 col-md-4 mb-3">
-            <h5>Enlaces Rápidos</h5>
+            <h4>Enlaces Rápidos</h4>
             <ul className="list-unstyled">
               <li>
                 <Link to="/" className="text-dark">
@@ -21,7 +21,7 @@ function Footer() {
               </li>
               <li>
                 <Link to="/slots" className="text-dark">
-                  Slots
+                  Tragaperras
                 </Link>
               </li>
               <li>
@@ -37,7 +37,7 @@ function Footer() {
             </ul>
           </div>
           <div className="col-12 col-md-4 mb-3">
-            <h5>Sobre Nosotros</h5>
+            <h4>Sobre Nosotros</h4>
             <p>
               ¡Bienvenido a nuestro casino! Somos un equipo apasionado que busca
               brindar la mejor experiencia de juego posible a nuestros
@@ -45,7 +45,7 @@ function Footer() {
             </p>
           </div>
           <div className="col-12 col-md-4 mb-3">
-            <h5>Contacto</h5>
+            <h4>Contacto</h4>
             <address>
               Dirección: Av. Casino, 123
               <br />

@@ -75,7 +75,6 @@ const Ruleta = () => {
   const [actualLose, setActualLose] = useState(0);
   const [insufficientFunds, setInsufficientFunds] = useState(false);
   const [girando, setGirando] = useState(false);
-  
 
   const handleAmountChange = async (index, value) => {
     const response = await fetchWalletBalance(userId);
@@ -111,9 +110,9 @@ const Ruleta = () => {
     const totalDegrees = numberSpins * 360 * 5 + randomDegrees;
     setRotationDegrees(totalDegrees);
     setSelectedNumber(
-        valuesMap.get(
-            Math.round((totalDegrees - numberSpins * 360 * 5) / sectionDegrees)
-        )
+      valuesMap.get(
+        Math.round((totalDegrees - numberSpins * 360 * 5) / sectionDegrees)
+      )
     );
     setNumberSpins((nSpin) => nSpin + 1);
   };
@@ -257,254 +256,265 @@ const Ruleta = () => {
     };
   }, [audio]);
 
-  
   return (
-      <>
+    <>
       <Helmet>
         <title>Ruleta</title>
       </Helmet>
-        <div style={{ backgroundColor: "#212529" }}>
-          <Navbar />
-          <div className="ruleta-page container">
-            <div className="faq-container">
-              <FAQ
-                  FAQname={"¿CÓMO JUGAR?"}
-                  FAQdescription={
-                      "HAZ TUS APUESTAS EN LOS CAMPOS DE ABAJO<br/>" +
-                      "CADA MULTIPLICADOR, MULTIPLICARÁ EL DINERO APOSTADO POR DICHO NÚMERO<br/>" +
-                      "DALE A GIRAR A LA RULETA"
+      <h1 role="heading" hidden>
+        Ruleta
+      </h1>
+      <div style={{ backgroundColor: "#212529" }}>
+        <Navbar />
+        <div className="ruleta-page container">
+          <div className="faq-container">
+            <FAQ
+              FAQname={"¿CÓMO JUGAR?"}
+              FAQdescription={
+                "Para jugar a la ruleta primero deberá registrarse o logearse en nuestra página web. " +
+                "Una vez hecho esto, deberá dirigirse a imagen de la ruleta y clicar en ella, esto le llevará a la página de juego. " +
+                "Una vez en esta página, deberá ingresar la cantidad de dinero que sea a una o más de las categorías y pulsar el botón de girar ruleta. " +
+                "Si gana, la cantidad de dinero recibida dependerá de la categoría en la que haya apostado, concretamente, apostar a la categoría 'X2' multiplicará " +
+                "la cantidad apostada por 2, apostar a la categoría 'X4' multiplicará la cantidad apostada por 4, apostar a la categoría 'X6' multiplicará la cantidad apostada por 6, " +
+                "apostar a la categoría 'X11' multiplicará la cantidad apostada por 11 y apostar a la categoría 'X21' multiplicará la cantidad apostada por 21. " +
+                "Si pierde, se reducirá la cantidad apostada de su monedero."
+              }
+              FAQindex={6}
+            />
+          </div>
+          <div className="row main-container">
+            <div className="col-12 col-lg-6 d-flex justify-content-center">
+              <div className="roulette-container position-relative">
+                <img
+                  className="roulette img-fluid"
+                  src={ruleta}
+                  style={{
+                    transform: `rotate(${rotationDegrees}deg)`,
+                    transition: "transform 5s ease",
+                  }}
+                  alt="Ruleta"
+                />
+                <img
+                  className={`star position-absolute ${
+                    girando || showX2 || showX4 || showX6 || showX11 || showX21
+                      ? "disabled"
+                      : ""
+                  }`}
+                  src={estrella}
+                  alt="Ruleta girando"
+                  onClick={
+                    !insufficientFunds &&
+                    !girando &&
+                    !showX2 &&
+                    !showX4 &&
+                    !showX6 &&
+                    !showX11 &&
+                    !showX21
+                      ? rouletteFunctioning
+                      : undefined
                   }
-                  FAQindex={6}
-              />
-            </div>
-            <div className="row main-container">
-              <div className="col-12 col-lg-6 d-flex justify-content-center">
-                <div className="roulette-container position-relative">
-                  <img
-                      className="roulette img-fluid"
-                      src={ruleta}
-                      style={{
-                        transform: `rotate(${rotationDegrees}deg)`,
-                        transition: "transform 5s ease",
-                      }}
-                      alt="Ruleta"
-                  />
-                  <img
-                      className={`star position-absolute ${
-                          girando || showX2 || showX4 || showX6 || showX11 || showX21
-                              ? "disabled"
-                              : ""
-                      }`}
-                      src={estrella}
-                      alt="Ruleta girando"
-                      onClick={
-                        !insufficientFunds &&
-                        !girando &&
-                        !showX2 &&
-                        !showX4 &&
-                        !showX6 &&
-                        !showX11 &&
-                        !showX21
-                            ? rouletteFunctioning
-                            : undefined
-                      }
-                      aria-label="Girar ruleta"
-                      role="button"
-                  />
+                  aria-label="Girar ruleta"
+                  role="button"
+                />
 
-                  {showX2 && (
-                      <img
-                          src={x2Image}
-                          alt="Por 2"
-                          className="position-absolute pulsate non-clickable"
-                          style={{
-                            top: "25%",
-                            left: "25%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                          aria-live="assertive"
-                          aria-label="Por dos"
-                      />
-                  )}
-                  {showX4 && (
-                      <img
-                          src={x4Image}
-                          alt="Por 4"
-                          className="position-absolute pulsate non-clickable"
-                          style={{
-                            top: "25%",
-                            left: "25%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                          aria-live="assertive"
-                          aria-label="Por cuatro"
-                      />
-                  )}
-                  {showX6 && (
-                      <img
-                          src={x6Image}
-                          alt="Por 6"
-                          className="position-absolute pulsate non-clickable"
-                          style={{
-                            top: "25%",
-                            left: "25%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                          aria-live="assertive"
-                          aria-label="Por seis"
-                      />
-                  )}
-                  {showX11 && (
-                      <img
-                          src={x11Image}
-                          alt="Por 11"
-                          className="position-absolute pulsate non-clickable"
-                          style={{
-                            top: "25%",
-                            left: "25%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                          aria-live="assertive"
-                          aria-label="Por once"
-                      />
-                  )}
-                  {showX21 && (
-                      <img
-                          src={x21Image}
-                          alt="Por 21"
-                          className="position-absolute pulsate non-clickable"
-                          style={{
-                            top: "25%",
-                            left: "25%",
-                            transform: "translate(-50%, -50%)",
-                          }}
-                          aria-live="assertive"
-                          aria-label="Por veintiuno"
-                      />
-                  )}
-                </div>
-              </div>
-              <div className="col-12 col-lg-6 bets-container d-flex flex-column align-items-center align-items-lg-start">
-                {amounts.map((value, index) => (
-                    <div key={index} className="bet-input mb-3">
-                      <label
-                          htmlFor={`bet-${index}`}
-                          className="text-white form-label"
-                      >
-                        Apuestas al X{seccionesMap.get(index)}:
-                      </label>
-                      <div className="input-group">
-                        <input
-                            id={`bet-${index}`}
-                            type="number"
-                            className="form-control"
-                            value={parseInt(value)}
-                            onChange={(e) =>
-                                handleAmountChange(index, e.target.value)
-                            }
-                            aria-label={`Apuestas al por${seccionesMap.get(index)}`}
-                            min="0"
-                            disabled={
-                                girando ||
-                                showX2 ||
-                                showX4 ||
-                                showX6 ||
-                                showX11 ||
-                                showX21
-                            }
-                        />
-
-                        <div className="input-group-append">
-                          <button
-                              className="btn btn-outline-secondary bet-button"
-                              type="button"
-                              onClick={() => handleAmountChange(index, 1)}
-                              disabled={
-                                  girando ||
-                                  showX2 ||
-                                  showX4 ||
-                                  showX6 ||
-                                  showX11 ||
-                                  showX21
-                              }
-                          >
-                            1€
-                          </button>
-                          <button
-                              className="btn btn-outline-secondary bet-button"
-                              type="button"
-                              onClick={() => handleAmountChange(index, 5)}
-                              disabled={
-                                  girando ||
-                                  showX2 ||
-                                  showX4 ||
-                                  showX6 ||
-                                  showX11 ||
-                                  showX21
-                              }
-                          >
-                            5€
-                          </button>
-                          <button
-                              className="btn btn-outline-secondary bet-button"
-                              type="button"
-                              onClick={() => handleAmountChange(index, 10)}
-                              disabled={
-                                  girando ||
-                                  showX2 ||
-                                  showX4 ||
-                                  showX6 ||
-                                  showX11 ||
-                                  showX21
-                              }
-                          >
-                            10€
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                ))}
-                {insufficientFunds && (
-                    <div
-                        style={{ color: "red" }}
-                        aria-label="Fondos insuficientes"
-                        aria-live="polite"
-                    >
-                      ¡Fondos Insuficientes!
-                    </div>
+                {showX2 && (
+                  <img
+                    src={x2Image}
+                    alt="Por 2"
+                    className="position-absolute pulsate non-clickable"
+                    style={{
+                      top: "25%",
+                      left: "25%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    aria-live="assertive"
+                    aria-label="Por dos"
+                  />
                 )}
-                <button
-                    className="btn btn-primary mt-3"
-                    onClick={rouletteFunctioning}
-                    disabled={
-                        insufficientFunds ||
+                {showX4 && (
+                  <img
+                    src={x4Image}
+                    alt="Por 4"
+                    className="position-absolute pulsate non-clickable"
+                    style={{
+                      top: "25%",
+                      left: "25%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    aria-live="assertive"
+                    aria-label="Por cuatro"
+                  />
+                )}
+                {showX6 && (
+                  <img
+                    src={x6Image}
+                    alt="Por 6"
+                    className="position-absolute pulsate non-clickable"
+                    style={{
+                      top: "25%",
+                      left: "25%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    aria-live="assertive"
+                    aria-label="Por seis"
+                  />
+                )}
+                {showX11 && (
+                  <img
+                    src={x11Image}
+                    alt="Por 11"
+                    className="position-absolute pulsate non-clickable"
+                    style={{
+                      top: "25%",
+                      left: "25%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    aria-live="assertive"
+                    aria-label="Por once"
+                  />
+                )}
+                {showX21 && (
+                  <img
+                    src={x21Image}
+                    alt="Por 21"
+                    className="position-absolute pulsate non-clickable"
+                    style={{
+                      top: "25%",
+                      left: "25%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                    aria-live="assertive"
+                    aria-label="Por veintiuno"
+                  />
+                )}
+              </div>
+            </div>
+            <div className="col-12 col-lg-6 bets-container d-flex flex-column align-items-center align-items-lg-start">
+              {amounts.map((value, index) => (
+                <div key={index} className="bet-input mb-3">
+                  <label
+                    htmlFor={`bet-${index}`}
+                    className="text-white form-label"
+                  >
+                    Apuestas al X{seccionesMap.get(index)}:
+                  </label>
+                  <div className="input-group">
+                    <input
+                      id={`bet-${index}`}
+                      type="number"
+                      className="form-control"
+                      value={parseInt(value)}
+                      onChange={(e) =>
+                        handleAmountChange(index, e.target.value)
+                      }
+                      aria-label={`Apuestas al por${seccionesMap.get(index)}`}
+                      min="0"
+                      disabled={
                         girando ||
                         showX2 ||
                         showX4 ||
                         showX6 ||
                         showX11 ||
                         showX21
-                    }
-                    aria-label="Girar ruleta"
-                >
-                  Girar ruleta
-                </button>
-                {!girando && !showX2 && !showX4 && !showX6 && !showX11 && !showX21 && (
-                    <div
-                        className="text-white mt-3"
-                        aria-live="polite"
-                        aria-atomic="true"
-                    >
-                      <p>Has Ganado: {actualProfit}</p>
-                      <p>Has Perdido: {actualLose}</p>
+                      }
+                    />
+
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-outline-secondary bet-button"
+                        type="button"
+                        onClick={() => handleAmountChange(index, 1)}
+                        disabled={
+                          girando ||
+                          showX2 ||
+                          showX4 ||
+                          showX6 ||
+                          showX11 ||
+                          showX21
+                        }
+                      >
+                        1€
+                      </button>
+                      <button
+                        className="btn btn-outline-secondary bet-button"
+                        type="button"
+                        onClick={() => handleAmountChange(index, 5)}
+                        disabled={
+                          girando ||
+                          showX2 ||
+                          showX4 ||
+                          showX6 ||
+                          showX11 ||
+                          showX21
+                        }
+                      >
+                        5€
+                      </button>
+                      <button
+                        className="btn btn-outline-secondary bet-button"
+                        type="button"
+                        onClick={() => handleAmountChange(index, 10)}
+                        disabled={
+                          girando ||
+                          showX2 ||
+                          showX4 ||
+                          showX6 ||
+                          showX11 ||
+                          showX21
+                        }
+                      >
+                        10€
+                      </button>
                     </div>
+                  </div>
+                </div>
+              ))}
+              {insufficientFunds && (
+                <div
+                  style={{ color: "red" }}
+                  aria-label="Fondos insuficientes"
+                  aria-live="polite"
+                >
+                  ¡Fondos Insuficientes!
+                </div>
+              )}
+              <button
+                className="btn btn-primary mt-3"
+                onClick={rouletteFunctioning}
+                disabled={
+                  insufficientFunds ||
+                  girando ||
+                  showX2 ||
+                  showX4 ||
+                  showX6 ||
+                  showX11 ||
+                  showX21
+                }
+                aria-label="Girar ruleta"
+              >
+                Girar ruleta
+              </button>
+              {!girando &&
+                !showX2 &&
+                !showX4 &&
+                !showX6 &&
+                !showX11 &&
+                !showX21 && (
+                  <div
+                    className="text-white mt-3"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <p>Has Ganado: {actualProfit}</p>
+                    <p>Has Perdido: {actualLose}</p>
+                  </div>
                 )}
-              </div>
             </div>
           </div>
-          <Footer />
         </div>
-      </>
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -132,7 +132,7 @@ const SignUp = () => {
             <div className="card bg-transparent border-1 border-light">
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <h2 className="card-title text-white">Regístrate</h2>
+                  <h1 className="card-title text-white">Regístrate</h1>
                   <button
                     type="button"
                     className="btn btn-outline-secondary"
@@ -160,6 +160,7 @@ const SignUp = () => {
                       <input
                         type="text"
                         name="name"
+                        id="name"
                         onChange={handleInput}
                         className={`form-control ${
                           errors.name ? "is-invalid" : ""
@@ -182,6 +183,7 @@ const SignUp = () => {
                       <input
                         type="text"
                         name="lastname"
+                        id="lastname"
                         onChange={handleInput}
                         className={`form-control ${
                           errors.lastname ? "is-invalid" : ""
@@ -204,6 +206,7 @@ const SignUp = () => {
                       <input
                         type="text"
                         name="dni"
+                        id="dni"
                         onChange={handleInput}
                         className={`form-control ${
                           errors.dni ? "is-invalid" : ""
@@ -229,6 +232,7 @@ const SignUp = () => {
                           errors.country ? "is-invalid" : ""
                         }`}
                         name="country"
+                        id="country"
                         onChange={handleInput}
                         value={values.country}
                         aria-label="Pais"
@@ -248,6 +252,7 @@ const SignUp = () => {
                       <input
                         type="date"
                         name="date"
+                        id="date"
                         onChange={handleInput}
                         className={`form-control ${
                           errors.date ? "is-invalid" : ""
@@ -297,6 +302,7 @@ const SignUp = () => {
                         className={`form-control ${
                           errors.email ? "is-invalid" : ""
                         }`}
+                        id="email"
                         name="email"
                         value={values.email}
                         aria-label="email"
@@ -319,6 +325,7 @@ const SignUp = () => {
                           className={`form-control ${
                             errors.password ? "is-invalid" : ""
                           }`}
+                          id="password"
                           onChange={handleInput}
                           name="password"
                           value={values.password}
@@ -329,7 +336,8 @@ const SignUp = () => {
                           type="button"
                           aria-label="mostrar contraseña"
                           onClick={togglePasswordVisibility}
-                          className="btn btn-dark"
+                          style={{ border: "2px solid #212529" }}
+                          className="btn btn-dark border-1 border-light"
                         >
                           <FaEye />
                         </button>
@@ -362,7 +370,7 @@ const SignUp = () => {
                     {/* Confirmar Contraseña */}
                     <div className="mb-4">
                       <label
-                        htmlFor="password"
+                        htmlFor="confirmPassword"
                         className={`form-label ${
                           errors.confirmPassword
                             ? "text-danger"
@@ -379,6 +387,7 @@ const SignUp = () => {
                             errors.confirmPassword ? "is-invalid" : ""
                           }`}
                           onChange={handleInput}
+                          id="confirmPassword"
                           name="confirmPassword"
                           value={values.confirmPassword}
                           aria-label="confirmar contraseña"
@@ -387,7 +396,8 @@ const SignUp = () => {
                           aria-label="mostrar contraseña"
                           type="button"
                           onClick={toggleConfirmPasswordVisibility}
-                          className="btn btn-dark"
+                          style={{ border: "2px solid #212529" }}
+                          className="btn btn-dark border-1 border-light"
                         >
                           <FaEye />
                         </button>
@@ -402,11 +412,15 @@ const SignUp = () => {
                           className="form-check-label text-white"
                         >
                           Tengo 18 y acepto los{" "}
-                          <a href="https://drive.google.com/file/d/19_fFcDUj8Yg_q6Ma0S8pdOmwTd-5YPAu/view?usp=drive_link">
+                          <a
+                            href="https://drive.google.com/file/d/19_fFcDUj8Yg_q6Ma0S8pdOmwTd-5YPAu/view?usp=drive_link"
+                            style={{ color: "#81B3E7" }}
+                          >
                             términos y condiciones
                           </a>
                         </label>
                         <input
+                          id="terms"
                           type="checkbox"
                           name="terms"
                           className="form-check-input"
@@ -429,7 +443,9 @@ const SignUp = () => {
                     <div className="mt-2">
                       <span className="text-white">
                         Si ya tienes una cuenta,{" "}
-                        <Link to="/login">Inicia sesion</Link>
+                        <Link to="/login" style={{ color: "#81B3E7" }}>
+                          Inicia sesion
+                        </Link>
                       </span>
                     </div>
                   </form>

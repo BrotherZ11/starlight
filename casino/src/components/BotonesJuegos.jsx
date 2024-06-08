@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Ruleta from "../assets/caruselRuleta.png";
 import Slots from "../assets/slotsBoton.png";
+import Prox from "../assets/proximamente.png";
 
 function BotonesJuegos() {
   return (
@@ -20,7 +21,7 @@ function BotonesJuegos() {
           </button>
         </Link>
       </div>
-      <div className="btn-container" tabIndex={-1}>
+      <div className="btn-container mb-3 me-lg-3" tabIndex={-1}>
         <Link to={"/slots"} tabIndex={0}>
           <button
             className="btn btn-primary position-relative p-0 border-0 overflow-hidden boton-juego"
@@ -33,6 +34,12 @@ function BotonesJuegos() {
             </span> */}
           </button>
         </Link>
+      </div>
+      <div className="btn-container" tabIndex={-1}>
+        <img src={Prox} className="img-fluid" alt="proximamente" />
+        {/* <span className="position-absolute text-black h2 top-50 start-50 translate-middle">
+              TRAGAPERRAS
+            </span> */}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import StarlightLogo from "../assets/logo.png";
+import StarlightLogo from "../assets/logo2.png";
 import { BsInfoCircle } from "react-icons/bs";
 import { useWallet } from "../context/WalletContext";
 
@@ -66,13 +66,13 @@ function Navbar() {
         <div className="navbar-nav">
           <div className="d-flex flex-column align-items-center text-center text-lg-start">
             <div style={{ fontFamily: "Outfit", fontWeight: "500" }}>
-              <p
+              <h2
                 className="fs-4 mb-0 mt-0"
                 aria-label="Monedero Título"
                 tabIndex={0}
               >
                 Monedero
-              </p>
+              </h2>
               <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
                 <div
                   className="wallet-balance bg-transparent text-black fs-5 px-4 py-2 rounded border border-1 border-dark me-2"
@@ -118,8 +118,9 @@ function Navbar() {
                 to={"/"}
                 className="text-white text-decoration-none"
                 tabIndex={0}
-              ></Link>
-              Cerrar sesión
+              >
+                Cerrar sesión
+              </Link>
             </button>
           ) : (
             <>

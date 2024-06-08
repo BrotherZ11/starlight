@@ -77,9 +77,7 @@ function ShopOpciones() {
               alt="Diez euros"
               style={{ width: "250px", height: "250px" }}
             />
-            <p className="h3" style={{ color: "#097400", fontSize: "2rem" }}>
-              10,00€
-            </p>
+            <h3 style={{ color: "#212529", fontSize: "2rem" }}>10,00€</h3>
           </button>
         </div>
         <div className="col-md-4 col-sm-6">
@@ -98,9 +96,7 @@ function ShopOpciones() {
               alt="Cincuenta euros"
               style={{ width: "250px", height: "250px" }}
             />
-            <p className="h3" style={{ color: "#097400", fontSize: "2rem" }}>
-              50,00€
-            </p>
+            <h3 style={{ color: "#212529", fontSize: "2rem" }}>50,00€</h3>
           </button>
         </div>
         <div className="col-md-4 col-sm-6">
@@ -119,14 +115,19 @@ function ShopOpciones() {
               alt="Cien euros"
               style={{ width: "250px", height: "250px" }}
             />
-            <p className="h3" style={{ color: "#097400", fontSize: "2rem" }}>
-              100,00€
-            </p>
+            <h3 style={{ color: "#212529", fontSize: "2rem" }}>100,00€</h3>
           </button>
         </div>
         <div className="col-12 mt-5">
           <div className="d-flex justify-content-center">
-            <label for="amountToAdd" className="text-white" aria-label="Añadir cantidad" style={{fontSize:"175%", marginTop:"1%", marginRight:"1%"}}>Añadir cantidad:</label>
+            <label
+              for="amountToAdd"
+              className="text-white"
+              aria-label="Añadir cantidad"
+              style={{ fontSize: "175%", marginTop: "1%", marginRight: "1%" }}
+            >
+              Añadir cantidad:
+            </label>
             <input
               type="number"
               id="amountToAdd"
@@ -139,7 +140,7 @@ function ShopOpciones() {
               }}
               min="0"
             />
-            
+
             <div
               style={{
                 backgroundColor: "transparent",
@@ -151,12 +152,12 @@ function ShopOpciones() {
               €
             </div>
             <button
-              className="btn btn-primary text-white text-decoration-none"
+              className="btn btn-primary text-dark text-decoration-none"
               style={{ backgroundColor: "#e4a700", border: "#e4a700" }}
               onClick={handleAddAmount}
-              aria-label="añadir cantidad"
+              aria-label="Realizar Compra"
             >
-              Añadir cantidad
+              Realizar Compra
             </button>
           </div>
           {errorMessage && (
@@ -173,7 +174,7 @@ function ShopOpciones() {
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Confirmación</h5>
+                  <h4 className="modal-title">Confirmación</h4>
                   <button
                     type="button"
                     className="close"
