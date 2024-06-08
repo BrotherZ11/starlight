@@ -63,7 +63,6 @@ const SlotMachine = () => {
               "Si gana, la cantidad de dinero recibida sera la apostada por 5, para ganar tienen que salir 3 figuras iguales" +
               "Si pierde, se reducirá la cantidad apostada de su monedero."
             }
-            FAQindex={6}
           />
         </div>
         <div className="container text-center mt-5">

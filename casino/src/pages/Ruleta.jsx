@@ -279,7 +279,6 @@ const Ruleta = () => {
                 "apostar a la categoría 'X11' multiplicará la cantidad apostada por 11 y apostar a la categoría 'X21' multiplicará la cantidad apostada por 21. " +
                 "Si pierde, se reducirá la cantidad apostada de su monedero."
               }
-              FAQindex={6}
             />
           </div>
           <div className="row main-container">

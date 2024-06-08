@@ -444,7 +444,7 @@ const SignUp = () => {
                       <span className="text-white">
                         Si ya tienes una cuenta,{" "}
                         <Link to="/login" style={{ color: "#81B3E7" }}>
-                          Inicia sesion
+                          Inicia sesión
                         </Link>
                       </span>
                     </div>

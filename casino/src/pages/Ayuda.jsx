@@ -99,7 +99,7 @@ function Ayuda() {
                 "Si gana, la cantidad de dinero recibida sera la apostada por 5, para ganar tienen que salir 3 figuras iguales" +
                 "Si pierde, se reducirá la cantidad apostada de su monedero."
               }
-              FAQindex={6}
+              FAQindex={7}
             />
           </div>
         </nav>
