@@ -5,7 +5,6 @@ import { FaEye } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import Validation from "../api/LoginValidation";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -78,7 +77,7 @@ function Login() {
             <div className="card bg-transparent border-1 border-light">
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <h2 className="card-title text-white ">Iniciar sesión</h2>
+                  <h1 className="card-title text-white ">Iniciar sesión</h1>
                   <button
                     type="button"
                     className="btn btn-outline-secondary"
@@ -92,6 +91,7 @@ function Login() {
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <label
+                      name="email"
                       htmlFor="email"
                       className={`form-label ${
                         errors.email ? "text-danger" : "text-warning "
@@ -112,6 +112,7 @@ function Login() {
                   </div>
                   <div className="mb-4">
                     <label
+                      name="password"
                       htmlFor="password"
                       className={`form-label ${
                         errors.password ? "text-danger" : "text-warning"
@@ -133,7 +134,8 @@ function Login() {
                       <button
                         aria-label="Mostrar contraseña"
                         type="button"
-                        className="btn btn-dark"
+                        style={{ border: "2px solid #212529" }}
+                        className="btn btn-dark border-1 border-light"
                         onClick={togglePasswordVisibility}
                       >
                         <FaEye />
@@ -152,7 +154,9 @@ function Login() {
                   <div className="mt-2">
                     <span className="text-white">
                       Si no tienes una cuenta,{" "}
-                      <Link to="/signup">regístrate</Link>
+                      <a href="#/signup" style={{ color: "#448EFD" }}>
+                        regístrate
+                      </a>
                     </span>
                   </div>
                 </form>
