@@ -85,7 +85,7 @@ function Navbar() {
                     aria-label="Tienda"
                     style={{
                       backgroundColor: "#212529",
-                      border: "2px solid #A46928",
+                      border: "2px solid #212529",
                     }}
                   >
                     +
