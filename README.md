@@ -1,5 +1,8 @@
 En principio para abrir y usar la página basta con acceder al siguiente enlace:
 https://brotherz11.github.io/starlight/
+Para Iniciar sesión sin necesidad de registrase se puede usar el siguiente usuario:
+Email:a@a.com
+Contraseña:1
 
 Si hay algun error, ya sea con el frontednd o el backend, se puede ejecutar de forma local de la siguiente manera:
 
